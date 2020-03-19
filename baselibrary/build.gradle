@@ -1,0 +1,104 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["compileSdkVersion"]
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // androidx
+    api rootProject.ext.dependencies["appcompat"]
+    api rootProject.ext.dependencies["design"]
+    api rootProject.ext.dependencies["constraint-layout"]
+
+    //rx
+    api rootProject.ext.dependencies["rxjava2"]
+    api rootProject.ext.dependencies["rxandroid2"]
+    api rootProject.ext.dependencies["rxlifecycle3"]
+    api rootProject.ext.dependencies["rxlifecycle3-android"]
+    api rootProject.ext.dependencies["rxlifecycle3-components"]
+    //network
+    api rootProject.ext.dependencies["okhttp3"]
+    api rootProject.ext.dependencies["okhttp3-log"]
+//    api rootProject.ext.dependencies["retrofit"]
+//    implementation rootProject.ext.dependencies["retrofit-converter-gson"]
+//    implementation rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
+    //glide
+    api rootProject.ext.dependencies["glide"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+    api rootProject.ext.dependencies["glide-loader-okhttp3"]
+//    api rootProject.ext.dependencies["glide-annotations"]
+    //gson
+    api rootProject.ext.dependencies["gson"]
+    //dagger2
+//    api rootProject.ext.dependencies["dagger2"]
+//    annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
+//    api rootProject.ext.dependencies["dagger2-android"]
+//    api rootProject.ext.dependencies["dagger2-android-support"]
+//    annotationProcessor rootProject.ext.dependencies["dagger2-android-processor"]
+    //Dagger2 javax.annotation不存在   添加缺失的部分javax注解
+//    api rootProject.ext.dependencies["javax.annotation"]
+    //butterknife
+//    api rootProject.ext.dependencies["butterknife"]
+//    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+    //eventbus
+//    api rootProject.ext.dependencies["eventbus"]
+    //arouter
+//    api rootProject.ext.dependencies["arouter"]
+//    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+    //BaseRecyclerViewAdapterHelper
+    api rootProject.ext.dependencies["brvah"]
+    //SmartRefreshLayout
+    api rootProject.ext.dependencies["SmartRefreshLayout"]
+    //topsnackbar
+    api rootProject.ext.dependencies["topsnackbar"]
+    // okgo 网络框架
+    api rootProject.ext.dependencies["okgo"]
+    // immersionbar 导航栏颜色
+    api rootProject.ext.dependencies["immersionbar"]
+    // 动画库
+    api rootProject.ext.dependencies["lottie"]
+    // 自适应屏幕
+    api rootProject.ext.dependencies["autosize"]
+    // bugly
+    api 'com.tencent.bugly:crashreport_upgrade:1.4.5'
+    api 'com.tencent.bugly:nativecrashreport:3.7.1'
+    // agentWeb
+//    api rootProject.ext.dependencies["agentWeb"]
+//    api rootProject.ext.dependencies["agentWebFile"]
+    // rxpermissions
+    api rootProject.ext.dependencies["rxpermissions"]
+//    api rootProject.ext.dependencies["permissions"]
+//    annotationProcessor rootProject.ext.dependencies["permissions_processor"]
+
+    // 换肤控件
+//    api 'skin.support:skin-support:4.0.4'                   // skin-support
+//    api 'skin.support:skin-support-appcompat:4.0.4'         // skin-support 基础控件支持
+//    api 'skin.support:skin-support-design:4.0.4'            // skin-support-design material design 控件支持[可选]
+//    api 'skin.support:skin-support-cardview:4.0.4'          // skin-support-cardview CardView 控件支持[可选]
+//    api 'skin.support:skin-support-constraint-layout:4.0.4' // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
+}

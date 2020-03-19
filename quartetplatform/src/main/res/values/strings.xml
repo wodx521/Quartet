@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">橙子</string>
+
+    <string name="tab1">首页</string>
+    <string name="tab2">快讯</string>
+    <string name="tab3">消息</string>
+    <string name="tab4">我的</string>
+    <string name="noFind">找不到软件？</string>
+    <string name="businessAlliance">商业联盟</string>
+    <string name="inquire">立即咨询</string>
+    <string name="join">立即加盟</string>
+    <string name="recommend">优质推荐</string>
+    <string name="defaultDay">%s 天</string>
+    <string name="projectType">项目类型：</string>
+    <string name="languageDemand">语言要求：</string>
+    <string name="expectedDuration">期望工期：</string>
+    <string name="needDes">需求描述：</string>
+    <string name="desNotice">请输入您的投诉或建议内容</string>
+    <string name="contact">联系方式</string>
+    <string name="inputContact">请输入联系方式</string>
+    <string name="submit">提交</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="custom">定制</string>
+    <string name="myFoot">我的足迹</string>
+    <string name="customPrivate">私人定制</string>
+    <string name="mySchedule">我的进度</string>
+    <string name="shopJoin">商家入驻</string>
+    <string name="inputAccount">请输入账号</string>
+    <string name="inputPass">请输入密码</string>
+    <string name="forgetPass">忘记密码</string>
+    <string name="login">登录</string>
+    <string name="registerNow"><![CDATA[ 还没有账号? <font color=\"#F9C349\">立即注册</font>]]></string>
+    <string name="phone">手机号</string>
+    <string name="send">获取验证码</string>
+    <string name="loginPass">登录密码</string>
+    <string name="loginPassAgain">再次输入登录密码</string>
+    <string name="register">注册</string>
+    <string name="inputPhone">请输入手机号</string>
+
+</resources>

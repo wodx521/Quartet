@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/mine_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.lr.baselibrary.weight.CircleImageView
+        android:id="@+id/ivHead"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv1"
+        app:layout_constraintStart_toStartOf="@id/iv1"
+        app:layout_constraintTop_toTopOf="@id/iv1" />
+
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="登录/注册"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="@id/iv1"
+        app:layout_constraintStart_toEndOf="@id/ivHead"
+        app:layout_constraintTop_toTopOf="@id/iv1" />
+
+    <ImageView
+        android:id="@+id/ivSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:src="@drawable/ic_setting"
+        app:layout_constraintEnd_toEndOf="@id/iv1"
+        app:layout_constraintTop_toTopOf="@id/iv1" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv1">
+
+        <TextView
+            android:id="@+id/tvFoot"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/footprint"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/myFoot"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/tvCustom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/mines"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/customPrivate"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/tvSchedule"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/schedule"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/mySchedule"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/tvShop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/shoper"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/shopJoin"
+            android:textColor="@color/colorBlack" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

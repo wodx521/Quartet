@@ -1,0 +1,3 @@
+rootProject.name='Quartet'
+include ':app', ':baselibrary', ':lib-zxing', ':agentweb-filechooser', ':agentweb-core'
+include ':quartetplatform'

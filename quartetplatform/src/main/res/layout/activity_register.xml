@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@color/colorOrange1"
+        android:gravity="center"
+        android:text="@string/register"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_gray_frame30"
+        android:drawableStart="@drawable/ic_phone"
+        android:drawablePadding="5dp"
+        android:hint="@string/phone"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintWidth_percent="0.9" />
+
+    <EditText
+        android:id="@+id/etCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_gray_frame30"
+        android:drawableStart="@drawable/ic_pass"
+        android:drawablePadding="5dp"
+        android:hint="@string/inputPass"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/tvSend"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@id/etPhone"
+        app:layout_constraintTop_toBottomOf="@id/etPhone"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tvSend"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_yellow_bg25"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/send"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="@id/etPhone"
+        app:layout_constraintStart_toEndOf="@id/etCode"
+        app:layout_constraintTop_toBottomOf="@id/etPhone"
+        app:layout_constraintWidth_percent="0.35" />
+
+    <EditText
+        android:id="@+id/etPass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_gray_frame30"
+        android:drawableStart="@drawable/ic_pass"
+        android:drawablePadding="5dp"
+        android:hint="@string/loginPass"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etCode"
+        app:layout_constraintWidth_percent="0.9" />
+
+    <EditText
+        android:id="@+id/etPassAgain"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_gray_frame30"
+        android:drawableStart="@drawable/ic_pass"
+        android:drawablePadding="5dp"
+        android:hint="@string/loginPassAgain"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPass"
+        app:layout_constraintWidth_percent="0.9" />
+
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_yellow_bg25"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/register"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPassAgain"
+        app:layout_constraintWidth_percent="0.9" />
+
+    <CheckBox
+        android:id="@+id/cbCheck"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/selector_check_box"
+        android:button="@null"
+        app:layout_constraintBottom_toBottomOf="@id/tvProtocol"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="@id/tvRegister"
+        app:layout_constraintTop_toTopOf="@id/tvProtocol" />
+
+    <TextView
+        android:id="@+id/tvProtocol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:padding="5dp"
+        android:text="我已阅读《软件用户协议》"
+        app:layout_constraintStart_toEndOf="@id/cbCheck"
+        app:layout_constraintTop_toBottomOf="@id/tvRegister" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
