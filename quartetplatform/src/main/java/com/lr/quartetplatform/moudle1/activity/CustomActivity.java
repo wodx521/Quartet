@@ -12,12 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lr.baselibrary.base.BaseMvpActivity;
-import com.lr.baselibrary.utils.GsonUtils;
 import com.lr.baselibrary.utils.UiTools;
 import com.lr.quartetplatform.GlideEngine;
 import com.lr.quartetplatform.R;
 import com.lr.quartetplatform.bean.CustomInfoBean;
-import com.lr.quartetplatform.bean.params.CustomParams;
+import com.lr.quartetplatform.bean.UploadBean;
 import com.lr.quartetplatform.moudle1.adapter.UploadAdapter;
 import com.lr.quartetplatform.moudle1.diglog.ChooseTypeDialog;
 import com.luck.picture.lib.PictureSelector;
@@ -47,7 +46,7 @@ public class CustomActivity extends BaseMvpActivity<CustomPresenter> {
     private List<LocalMedia> selectList;
     private UploadAdapter uploadAdapter;
     private HttpParams httpParams = new HttpParams();
-    private CustomParams customParams = new CustomParams();
+    private StringBuffer stringBuffer = new StringBuffer();
 
     @Override
     protected CustomPresenter getPresenter() {
@@ -93,7 +92,6 @@ public class CustomActivity extends BaseMvpActivity<CustomPresenter> {
         uploadAdapter.setClickListener(new UploadAdapter.ClickListener() {
             @Override
             public void addListener(int position) {
-                String s = imageList.get(position);
                 rxPermissions
                         .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .subscribe(granted -> {
@@ -115,7 +113,8 @@ public class CustomActivity extends BaseMvpActivity<CustomPresenter> {
 
             @Override
             public void deleteListener(int position) {
-
+                imageList.remove(position);
+                uploadAdapter.setImageList(imageList);
             }
         });
         mPresenter.getCustomInfo();
@@ -156,18 +155,37 @@ public class CustomActivity extends BaseMvpActivity<CustomPresenter> {
                 break;
             case R.id.tvSubmit:
                 // 提交
-                customParams.setDemandcontent(UiTools.getText(etNeedDes));
-                customParams.setHomeimage("");
-                customParams.setLanguage(UiTools.getText(tvProjectLanguage));
-                customParams.setMobile(UiTools.getText(etContact));
-                customParams.setTimelimit(UiTools.getText(tvProjectCycle));
-                customParams.setType(UiTools.getText(tvProjectType));
-                mPresenter.submitCustom(GsonUtils.toJson(customParams));
+                String des = UiTools.getText(etNeedDes);
+                String language = UiTools.getText(tvProjectLanguage);
+                String contactPhone = UiTools.getText(etContact);
+                String projectCycle = UiTools.getText(tvProjectCycle);
+                String projectType = UiTools.getText(tvProjectType);
+
+                if (imageList != null && imageList.size() > 0) {
+                    stringBuffer.setLength(0);
+                    for (String imageUrl : imageList) {
+                        stringBuffer.append(imageUrl).append(",");
+                    }
+                }
+
+                if (UiTools.noEmpty(contactPhone)) {
+                    httpParams.put("type", projectType);
+                    httpParams.put("language", language);
+                    httpParams.put("timelimit", projectCycle);
+                    httpParams.put("demandcontent", des);
+                    httpParams.put("homeimage", stringBuffer.toString());
+                    httpParams.put("mobile", contactPhone);
+                    mPresenter.submitCustom(httpParams);
+                } else {
+                    if (!UiTools.noEmpty(contactPhone)) {
+                        UiTools.showToast(R.string.inputContact);
+                    }
+                }
                 break;
             case R.id.tvProjectLanguage:
                 // 切换开发语言
-                if (language != null && language.size() > 0) {
-                    chooseTypeDialog.getDialog(language, "2");
+                if (this.language != null && this.language.size() > 0) {
+                    chooseTypeDialog.getDialog(this.language, "2");
                 }
                 break;
             case R.id.tvProjectType:
@@ -213,12 +231,20 @@ public class CustomActivity extends BaseMvpActivity<CustomPresenter> {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void setUploadResult(String imageUrl) {
+    public void setUploadResult(UploadBean uploadBean) {
+        String imageUrl = uploadBean.getUrl();
         if (imageList.size() == 1) {
             imageList.add(0, imageUrl);
         } else {
-            imageList.add(imageList.size() - 2, imageUrl);
+            if (imageList.size() > 4) {
+                imageList.remove(imageList.size() - 2);
+            }
+            imageList.add(imageList.size() - 1, imageUrl);
         }
         uploadAdapter.setImageList(imageList);
+    }
+
+    public void setCustomSuccess() {
+        finish();
     }
 }

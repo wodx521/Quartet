@@ -8,10 +8,13 @@ import com.lr.baselibrary.okgoutil.CustomizeStringCallback;
 import com.lr.baselibrary.okgoutil.OkGoUtils;
 import com.lr.quartetplatform.UrlConstant;
 import com.lr.quartetplatform.bean.CustomInfoBean;
+import com.lr.quartetplatform.bean.CustomResult;
+import com.lr.quartetplatform.bean.UploadBean;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.request.base.Request;
 
 import java.lang.reflect.Type;
+import java.util.List;
 
 public class CustomPresenter extends BasePresenterImpl<CustomActivity> {
     public void getCustomInfo() {
@@ -49,13 +52,13 @@ public class CustomPresenter extends BasePresenterImpl<CustomActivity> {
         OkGoUtils.postRequest(UrlConstant.COMMON_UPLOAD, "uploadImage", httpParams, new CustomizeStringCallback() {
             @Override
             public Type getResultType() {
-                return new TypeToken<GeneralResult<String>>() {
+                return new TypeToken<GeneralResult<UploadBean>>() {
                 }.getType();
             }
 
             @Override
             public void onRequestSuccess(GeneralResult generalResult) {
-                String imageUrl = (String) generalResult.data;
+                UploadBean imageUrl = (UploadBean) generalResult.data;
                 mPresenterView.setUploadResult(imageUrl);
             }
 
@@ -76,18 +79,17 @@ public class CustomPresenter extends BasePresenterImpl<CustomActivity> {
         });
     }
 
-    public void submitCustom(String json) {
-        OkGoUtils.postRequest(UrlConstant.USER_CUSTOMIZATION_CREATE, "submitCustom", json, new CustomizeStringCallback() {
+    public void submitCustom(HttpParams httpParams) {
+        OkGoUtils.postRequest(UrlConstant.USER_CUSTOMIZATION_CREATE, "submitCustom", httpParams, new CustomizeStringCallback() {
             @Override
             public Type getResultType() {
-                return new TypeToken<GeneralResult<String>>() {
+                return new TypeToken<GeneralResult<CustomResult>>() {
                 }.getType();
             }
 
             @Override
             public void onRequestSuccess(GeneralResult generalResult) {
-                String imageUrl = (String) generalResult.data;
-                mPresenterView.setUploadResult(imageUrl);
+                mPresenterView.setCustomSuccess();
             }
 
             @Override
