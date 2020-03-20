@@ -9,7 +9,9 @@ import com.lr.baselibrary.base.BaseMvpActivity;
 import com.lr.baselibrary.utils.CountDownUtils;
 import com.lr.baselibrary.utils.GsonUtils;
 import com.lr.baselibrary.utils.UiTools;
+import com.lr.quartetplatform.BuildConfig;
 import com.lr.quartetplatform.R;
+import com.lr.quartetplatform.UrlConstant;
 import com.lr.quartetplatform.bean.params.SendParams;
 import com.lr.quartetplatform.moudle4.presenter.RegisterPresenter;
 
@@ -28,6 +30,12 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> {
     @Override
     protected void initData() {
         countDownUtils = new CountDownUtils();
+        countDownUtils.setTimeFinishListener(new CountDownUtils.CountTimeFinishListener() {
+            @Override
+            public void onTimeFinishListener() {
+                tvSend.setEnabled(true);
+            }
+        });
     }
 
     @Override
@@ -82,6 +90,11 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> {
     }
 
     public void sendSuccess() {
-        countDownUtils.getTimer(10, tvSend, UiTools.getString(R.string.send));
+        tvSend.setEnabled(false);
+        if (BuildConfig.DEBUG) {
+            countDownUtils.getTimer(UrlConstant.TEST_TIME, tvSend, UiTools.getString(R.string.send));
+        } else {
+            countDownUtils.getTimer(UrlConstant.RELEASE_TIME, tvSend, UiTools.getString(R.string.send));
+        }
     }
 }

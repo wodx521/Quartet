@@ -13,4 +13,8 @@ public class UrlConstant {
     // 发送短信
     public static final String INDEX_SENDSMS = BASE_URL + "index/sendSms";
 
+
+    public static final int TEST_TIME = 10;
+    public static final int RELEASE_TIME = 60;
+
 }

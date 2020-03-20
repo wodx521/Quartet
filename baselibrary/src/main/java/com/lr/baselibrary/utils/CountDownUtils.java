@@ -28,7 +28,7 @@ public class CountDownUtils {
                 long remainingSecond = millisUntilFinished / 1000 - 1;
                 if (textView != null) {
                     textView.setClickable(false);
-                    textView.setText(remainingSecond + " S");
+                    textView.setText("重新获取" + remainingSecond + " S");
                 }
                 if (remainingSecond == 0) {
                     //剩余0秒时,及时结束,调用结束方法
@@ -152,15 +152,15 @@ public class CountDownUtils {
         mCountTimeFinishListener = countTimeFinishListener;
     }
 
-    public interface CountTimeFinishListener {
-        void onTimeFinishListener();
-    }
-
     public void setCountTimerRemainingListener(CountTimerRemainingListener countTimerRemainingListener) {
         this.countTimerRemainingListener = countTimerRemainingListener;
     }
 
-    public interface  CountTimerRemainingListener{
-          void onRemainingTime(long remainingSecond);
+    public interface CountTimeFinishListener {
+        void onTimeFinishListener();
+    }
+
+    public interface CountTimerRemainingListener {
+        void onRemainingTime(long remainingSecond);
     }
 }
