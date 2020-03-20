@@ -22,6 +22,7 @@ import com.lr.quartetplatform.moudle1.activity.WebActivity;
 import com.lr.quartetplatform.moudle1.adapter.ClassificationAdapter;
 import com.lr.quartetplatform.moudle1.adapter.ImageAdapter;
 import com.lr.quartetplatform.moudle1.adapter.RecommendAdapter;
+import com.lr.quartetplatform.moudle4.activity.MyJoinActivity;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -141,7 +142,7 @@ public class FirstFragment extends BaseMvpFragment<FirstPresenter> {
                     // 加联盟
                     bundle.clear();
                     bundle.putString("url","http://nztadmin.jinjifuweng.com/#/pages/my/supplier");
-                    startActivity(FirstFragment.this, bundle, WebActivity.class);
+                    startActivity(FirstFragment.this, null, MyJoinActivity.class);
                 }
                 break;
             default:

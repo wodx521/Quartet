@@ -54,5 +54,14 @@
     <string name="loginNewPass">请输入新密码</string>
     <string name="loginNewPassAgain">请再次输入新密码</string>
     <string name="exitSuccess">退出成功</string>
+    <string name="joinSupplier">入驻供应商</string>
+    <string name="companyName">公司名称</string>
+    <string name="inputCompanyName">请输入您的公司名称</string>
+    <string name="contactPerson">联系人</string>
+    <string name="contactPhone">联系电话</string>
+    <string name="productType">主营类型</string>
+    <string name="inputContactName">请输入联系人姓名</string>
+    <string name="inputContactPhone">请输入您的联系电话</string>
+    <string name="chooseProjectType">请选择主营类型</string>
 
 </resources>

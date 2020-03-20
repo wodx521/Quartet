@@ -36,6 +36,9 @@
         <activity android:name=".moudle4.activity.ProtocolActivity" />
         <activity android:name=".moudle4.activity.SettingActivity" />
         <activity android:name=".moudle4.activity.SetNickNameActivity" />
+        <activity android:name=".moudle4.activity.MyFootActivity" />
+        <activity android:name=".moudle4.activity.MyScheduleActivity" />
+        <activity android:name=".moudle4.activity.MyJoinActivity" />
 
         <meta-data
             android:name="design_width_in_dp"

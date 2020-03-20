@@ -27,7 +27,12 @@ public class UrlConstant {
     public static final String USER_INDEX = BASE_URL + "user/index";
     // 重置密码
     public static final String USER_RESETPWD = BASE_URL + "user/resetpwd";
-
+    // 我的足迹
+    public static final String SHOP_MYGOODSLIST = BASE_URL + "shop/myGoodsList";
+    // 入驻类型
+    public static final String INDEX_SUPPLIE_TYPE = BASE_URL + "index/supplie_type";
+    // 入驻提交
+    public static final String INDEX_SETTLEDSUPPLIERS = BASE_URL + "user/settledSuppliers";
 
 
     public static final String CACHE_CONSTANT = "userInfo";
@@ -37,7 +42,6 @@ public class UrlConstant {
     public static final int LOGIN = 1;
     public static final int TEST_TIME = 10;
     public static final int RELEASE_TIME = 60;
-
 
 
 }

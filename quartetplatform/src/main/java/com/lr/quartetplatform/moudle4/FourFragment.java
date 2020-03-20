@@ -19,7 +19,11 @@ import com.lr.quartetplatform.UrlConstant;
 import com.lr.quartetplatform.bean.DataCache;
 import com.lr.quartetplatform.bean.RegisterBean;
 import com.lr.quartetplatform.bean.UserMe;
+import com.lr.quartetplatform.moudle1.activity.CustomActivity;
 import com.lr.quartetplatform.moudle4.activity.LoginActivity;
+import com.lr.quartetplatform.moudle4.activity.MyFootActivity;
+import com.lr.quartetplatform.moudle4.activity.MyJoinActivity;
+import com.lr.quartetplatform.moudle4.activity.MyScheduleActivity;
 import com.lr.quartetplatform.moudle4.activity.SettingActivity;
 import com.lr.quartetplatform.reaml.RealmUtils;
 
@@ -112,16 +116,16 @@ public class FourFragment extends BaseMvpFragment<FourPresenter> {
                 startActivityForResult(FourFragment.this, null, UrlConstant.LOGIN, LoginActivity.class);
                 break;
             case R.id.tvFoot:
-
+                startActivity(FourFragment.this, null, MyFootActivity.class);
                 break;
             case R.id.tvCustom:
-
+                startActivity(FourFragment.this, null, CustomActivity.class);
                 break;
             case R.id.tvSchedule:
-
+                startActivity(FourFragment.this, null, MyScheduleActivity.class);
                 break;
             case R.id.tvShop:
-
+                startActivity(FourFragment.this, null, MyJoinActivity.class);
                 break;
             default:
         }
@@ -199,6 +203,7 @@ public class FourFragment extends BaseMvpFragment<FourPresenter> {
     }
 
     public void loginTimeOut() {
+        SpUtils.put("token", "");
         GlideApp.with(FourFragment.this)
                 .load(R.drawable.avatar)
                 .placeholder(R.drawable.avatar)
