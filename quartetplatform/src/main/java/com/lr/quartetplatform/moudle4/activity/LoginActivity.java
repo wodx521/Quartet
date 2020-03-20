@@ -1,13 +1,19 @@
 package com.lr.quartetplatform.moudle4.activity;
 
+import android.text.Html;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lr.baselibrary.base.BaseMvpActivity;
+import com.lr.baselibrary.utils.GsonUtils;
+import com.lr.baselibrary.utils.UiTools;
 import com.lr.quartetplatform.R;
+import com.lr.quartetplatform.bean.RegisterBean;
 import com.lr.quartetplatform.moudle4.presenter.LoginPresenter;
+import com.lr.quartetplatform.reaml.RealmUtils;
+import com.lzy.okgo.model.HttpParams;
 
 public class LoginActivity extends BaseMvpActivity<LoginPresenter> {
     private TextView tvTitle;
@@ -17,6 +23,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> {
     private TextView tvForget;
     private TextView tvLogin;
     private TextView tvRegister;
+    private HttpParams httpParams = new HttpParams();
 
     @Override
     protected LoginPresenter getPresenter() {
@@ -26,6 +33,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> {
     @Override
     protected void initData() {
         tvTitle.setText(R.string.login);
+        tvRegister.setText(Html.fromHtml(UiTools.getString(R.string.registerNow)));
     }
 
     @Override
@@ -62,12 +70,32 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> {
                 startActivity(LoginActivity.this, null, ForgetPassActivity.class);
                 break;
             case R.id.tvLogin:
-
+                String pass = UiTools.getText(etPass);
+                String phone = UiTools.getText(etPhone);
+                if (UiTools.noEmpty(phone, pass)) {
+                    httpParams.clear();
+                    httpParams.put("account", phone);
+                    httpParams.put("password", pass);
+                    mPresenter.login(httpParams);
+                } else {
+                    if (!UiTools.noEmpty(phone)) {
+                        UiTools.showToast(R.string.inputAccount);
+                    } else if (!UiTools.noEmpty(pass)) {
+                        UiTools.showToast(R.string.inputPass);
+                    }
+                }
                 break;
             case R.id.tvRegister:
                 startActivity(LoginActivity.this, null, RegisterActivity.class);
                 break;
             default:
         }
+    }
+
+    public void loginSuccess(RegisterBean registerBean) {
+        String registerInfo = GsonUtils.toJson(registerBean);
+        RealmUtils.putCache("registerResultInfo", registerInfo);
+        setResult(RESULT_OK);
+        finish();
     }
 }

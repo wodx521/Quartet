@@ -53,7 +53,7 @@
         android:background="@drawable/shape_gray_frame30"
         android:drawableStart="@drawable/ic_pass"
         android:drawablePadding="5dp"
-        android:hint="@string/inputPass"
+        android:hint="@string/inputCode"
         android:paddingStart="10dp"
         android:paddingTop="5dp"
         android:paddingEnd="10dp"
@@ -68,17 +68,15 @@
     <TextView
         android:id="@+id/tvSend"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_height="0dp"
         android:background="@drawable/shape_yellow_bg25"
         android:gravity="center"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
         android:text="@string/send"
         android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="@id/etPhone"
         app:layout_constraintStart_toEndOf="@id/etCode"
-        app:layout_constraintTop_toBottomOf="@id/etPhone"
+        app:layout_constraintBottom_toBottomOf="@id/etCode"
+        app:layout_constraintTop_toTopOf="@id/etCode"
         app:layout_constraintWidth_percent="0.35" />
 
     <EditText
@@ -90,6 +88,7 @@
         android:drawableStart="@drawable/ic_pass"
         android:drawablePadding="5dp"
         android:hint="@string/loginPass"
+        android:inputType="textPassword"
         android:paddingStart="10dp"
         android:paddingTop="5dp"
         android:paddingEnd="10dp"
@@ -100,6 +99,20 @@
         app:layout_constraintTop_toBottomOf="@id/etCode"
         app:layout_constraintWidth_percent="0.9" />
 
+    <CheckBox
+        android:id="@+id/cb1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/selector_hide_show"
+        android:button="@null"
+        app:layout_constraintBottom_toBottomOf="@id/etPass"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/etPass"
+        app:layout_constraintTop_toTopOf="@id/etPass" />
+
     <EditText
         android:id="@+id/etPassAgain"
         android:layout_width="0dp"
@@ -109,6 +122,7 @@
         android:drawableStart="@drawable/ic_pass"
         android:drawablePadding="5dp"
         android:hint="@string/loginPassAgain"
+        android:inputType="textPassword"
         android:paddingStart="10dp"
         android:paddingTop="5dp"
         android:paddingEnd="10dp"
@@ -118,6 +132,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPass"
         app:layout_constraintWidth_percent="0.9" />
+
+    <CheckBox
+        android:id="@+id/cb2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/selector_hide_show"
+        android:button="@null"
+        app:layout_constraintBottom_toBottomOf="@id/etPassAgain"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/etPassAgain"
+        app:layout_constraintTop_toTopOf="@id/etPassAgain" />
 
     <TextView
         android:id="@+id/tvRegister"
@@ -141,10 +169,12 @@
         android:layout_height="0dp"
         android:background="@drawable/selector_check_box"
         android:button="@null"
+        android:checked="true"
         app:layout_constraintBottom_toBottomOf="@id/tvProtocol"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="@id/tvRegister"
         app:layout_constraintTop_toTopOf="@id/tvProtocol" />
+
 
     <TextView
         android:id="@+id/tvProtocol"
@@ -152,7 +182,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:padding="5dp"
-        android:text="我已阅读《软件用户协议》"
+        android:text="@string/protocol"
         app:layout_constraintStart_toEndOf="@id/cbCheck"
         app:layout_constraintTop_toBottomOf="@id/tvRegister" />
 

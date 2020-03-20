@@ -17,6 +17,7 @@
     <com.lr.baselibrary.weight.CircleImageView
         android:id="@+id/ivHead"
         android:layout_width="60dp"
+        android:src="@drawable/avatar"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
         app:layout_constraintBottom_toBottomOf="@id/iv1"
@@ -28,7 +29,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="登录/注册"
+        android:text="@string/loginRegister"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="@id/iv1"
+        app:layout_constraintStart_toEndOf="@id/ivHead"
+        app:layout_constraintTop_toTopOf="@id/iv1" />
+
+    <TextView
+        android:id="@+id/tvNickName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:visibility="gone"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="@id/iv1"
         app:layout_constraintStart_toEndOf="@id/ivHead"

@@ -1,6 +1,10 @@
 package com.lr.quartetplatform.moudle4.activity;
 
+import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,15 +16,19 @@ import com.lr.baselibrary.utils.UiTools;
 import com.lr.quartetplatform.BuildConfig;
 import com.lr.quartetplatform.R;
 import com.lr.quartetplatform.UrlConstant;
-import com.lr.quartetplatform.bean.params.SendParams;
+import com.lr.quartetplatform.bean.RegisterBean;
 import com.lr.quartetplatform.moudle4.presenter.RegisterPresenter;
+import com.lr.quartetplatform.reaml.RealmUtils;
+import com.lzy.okgo.model.HttpParams;
 
 public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> {
     private ImageView ivBack;
     private EditText etPhone, etCode, etPass, etPassAgain;
     private TextView tvSend, tvRegister, tvProtocol;
-    private SendParams sendParams = new SendParams();
+    private CheckBox cb1, cb2, cbCheck;
+    private HttpParams httpParams = new HttpParams();
     private CountDownUtils countDownUtils;
+    private Bundle bundle = new Bundle();
 
     @Override
     protected RegisterPresenter getPresenter() {
@@ -53,6 +61,9 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> {
         etPassAgain = findViewById(R.id.etPassAgain);
         tvRegister = findViewById(R.id.tvRegister);
         tvProtocol = findViewById(R.id.tvProtocol);
+        cb1 = findViewById(R.id.cb1);
+        cb2 = findViewById(R.id.cb2);
+        cbCheck = findViewById(R.id.cbCheck);
     }
 
     @Override
@@ -61,29 +72,75 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> {
         tvSend.setOnClickListener(this);
         tvRegister.setOnClickListener(this);
         tvProtocol.setOnClickListener(this);
+        cb1.setOnClickListener(this);
+        cb2.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
+        String phone, code, pass, passAgain;
         switch (v.getId()) {
             case R.id.ivBack:
                 finish();
                 break;
             case R.id.tvSend:
-                String phone = UiTools.getText(etPhone);
+                httpParams.clear();
+                phone = UiTools.getText(etPhone);
                 if (UiTools.noEmpty(phone)) {
-                    sendParams.setEvent("register");
-                    sendParams.setMobile(phone);
-                    mPresenter.sendCode(GsonUtils.toJson(sendParams));
+                    httpParams.put("mobile", phone);
+                    httpParams.put("event", "register");
+                    mPresenter.sendCode(httpParams);
                 } else {
                     UiTools.showToast(R.string.inputPhone);
                 }
                 break;
             case R.id.tvRegister:
+                httpParams.clear();
+                phone = UiTools.getText(etPhone);
+                code = UiTools.getText(etCode);
+                pass = UiTools.getText(etPass);
+                passAgain = UiTools.getText(etPassAgain);
 
+                if (UiTools.noEmpty(phone, code, pass, passAgain) && pass.equals(passAgain) && cbCheck.isChecked()) {
+                    httpParams.put("code", code);
+                    httpParams.put("invitaioncode", "");
+                    httpParams.put("password", pass);
+                    httpParams.put("repassword", passAgain);
+                    httpParams.put("mobile", phone);
+                    httpParams.put("flag_bp", "");
+                    mPresenter.register(httpParams);
+                } else {
+                    if (!UiTools.noEmpty(phone)) {
+                        UiTools.showToast(R.string.inputPhone);
+                    } else if (!UiTools.noEmpty(code)) {
+                        UiTools.showToast(R.string.inputCode);
+                    } else if (!UiTools.noEmpty(pass)) {
+                        UiTools.showToast(R.string.inputPass);
+                    } else if (!UiTools.noEmpty(passAgain)) {
+                        UiTools.showToast(R.string.loginPassAgain);
+                    } else if (!pass.equals(passAgain)) {
+                        UiTools.showToast(R.string.passTwiceError);
+                    } else if (!cbCheck.isChecked()) {
+                        UiTools.showToast(R.string.readProtocol);
+                    }
+                }
                 break;
             case R.id.tvProtocol:
-
+                mPresenter.protocol();
+                break;
+            case R.id.cb1:
+                if (cb1.isChecked()) {
+                    etPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    etPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                break;
+            case R.id.cb2:
+                if (cb2.isChecked()) {
+                    etPassAgain.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    etPassAgain.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
                 break;
             default:
         }
@@ -96,5 +153,17 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> {
         } else {
             countDownUtils.getTimer(UrlConstant.RELEASE_TIME, tvSend, UiTools.getString(R.string.send));
         }
+    }
+
+    public void registerSuccess(RegisterBean registerBean) {
+        String registerInfo = GsonUtils.toJson(registerBean);
+        RealmUtils.putCache("registerResultInfo", registerInfo);
+        finish();
+    }
+
+    public void setProtocol(String protocol) {
+        bundle.clear();
+        bundle.putString("protocolContent", protocol);
+        startActivity(RegisterActivity.this, bundle, ProtocolActivity.class);
     }
 }

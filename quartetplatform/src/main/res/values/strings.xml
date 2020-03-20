@@ -37,5 +37,17 @@
     <string name="loginPassAgain">再次输入登录密码</string>
     <string name="register">注册</string>
     <string name="inputPhone">请输入手机号</string>
+    <string name="inputCode">请输入验证码</string>
+    <string name="protocol">我已阅读《软件用户协议》</string>
+    <string name="passTwiceError">两次登录密码不一致</string>
+    <string name="userProtocol">用户协议</string>
+    <string name="readProtocol">请阅读用户协议</string>
+    <string name="loginRegister">登录/注册</string>
+    <string name="setting">设置</string>
+    <string name="exit">退出</string>
+    <string name="setAvatar">设置头像</string>
+    <string name="setNick">设置昵称</string>
+    <string name="setSignature">修改签名</string>
+    <string name="setPass">修改密码</string>
 
 </resources>
