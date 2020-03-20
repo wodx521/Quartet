@@ -1,7 +1,8 @@
-package com.lr.quartetplatform.moudle4;
+package com.lr.quartetplatform.moudle4.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,9 +11,17 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.lr.baselibrary.base.BaseMvpActivity;
+import com.lr.baselibrary.utils.GsonUtils;
+import com.lr.baselibrary.utils.SpUtils;
+import com.lr.baselibrary.utils.UiTools;
 import com.lr.quartetplatform.GlideEngine;
 import com.lr.quartetplatform.R;
+import com.lr.quartetplatform.UrlConstant;
+import com.lr.quartetplatform.bean.DataCache;
+import com.lr.quartetplatform.bean.RegisterBean;
+import com.lr.quartetplatform.bean.UserInfo;
 import com.lr.quartetplatform.moudle4.presenter.SettingPresenter;
+import com.lr.quartetplatform.reaml.RealmUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -30,7 +39,8 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter> {
     private TextView tvSetAvatar, tvSetNickName, tvSetSignature, tvSetPass, tvExit;
     private RxPermissions rxPermissions;
     private List<LocalMedia> selectList;
-    private HttpParams httpParams;
+    private HttpParams httpParams = new HttpParams();
+    private Bundle bundle = new Bundle();
 
     @Override
     protected SettingPresenter getPresenter() {
@@ -93,16 +103,25 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter> {
                         });
                 break;
             case R.id.tvSetNickName:
-
+                bundle.clear();
+                bundle.putString("type", "1");
+                startActivityForResult(SettingActivity.this, bundle, UrlConstant.LOGIN, SetNickNameActivity.class);
                 break;
             case R.id.tvSetSignature:
-
+                bundle.clear();
+                bundle.putString("type", "2");
+                startActivityForResult(SettingActivity.this, bundle, UrlConstant.LOGIN, SetNickNameActivity.class);
                 break;
             case R.id.tvSetPass:
-
+                bundle.clear();
+                bundle.putString("type", "0");
+                startActivity(SettingActivity.this, bundle, ForgetPassActivity.class);
                 break;
             case R.id.tvExit:
-
+                UiTools.showToast(R.string.exitSuccess);
+                SpUtils.put("token","");
+                setResult(RESULT_OK);
+                finish();
                 break;
             default:
         }
@@ -116,7 +135,23 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter> {
             String path = localMedia.getPath();
             httpParams.put("file", new HttpParams.FileWrapper(new File(path), localMedia.getFileName(), MediaType.parse(localMedia.getMimeType())));
             mPresenter.uploadImage(httpParams);
+        } else if (resultCode == RESULT_OK && requestCode == UrlConstant.LOGIN) {
+            setResult(RESULT_OK);
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void setSuccess(String url) {
+        String phone = (String) SpUtils.get("phone", "");
+        DataCache dataCache = RealmUtils.queryData(phone + UrlConstant.CACHE_CONSTANT);
+        if (dataCache != null && UiTools.noEmpty(dataCache.getCacheContent())) {
+            RegisterBean registerBean = GsonUtils.fromJson(dataCache.getCacheContent(), RegisterBean.class);
+            if (registerBean.getUserInfo() != null) {
+                UserInfo userInfo = registerBean.getUserInfo();
+                userInfo.setAvatar(url);
+                RealmUtils.putCache(phone + UrlConstant.CACHE_CONSTANT, GsonUtils.toJson(registerBean));
+                setResult(RESULT_OK);
+            }
+        }
     }
 }

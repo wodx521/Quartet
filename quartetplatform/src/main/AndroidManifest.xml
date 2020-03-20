@@ -34,7 +34,8 @@
         <activity android:name=".moudle4.activity.ForgetPassActivity" />
         <activity android:name=".moudle4.activity.RegisterActivity" />
         <activity android:name=".moudle4.activity.ProtocolActivity" />
-        <activity android:name=".moudle4.SettingActivity" />
+        <activity android:name=".moudle4.activity.SettingActivity" />
+        <activity android:name=".moudle4.activity.SetNickNameActivity" />
 
         <meta-data
             android:name="design_width_in_dp"

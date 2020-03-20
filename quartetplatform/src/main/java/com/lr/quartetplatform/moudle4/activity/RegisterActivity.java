@@ -156,8 +156,9 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> {
     }
 
     public void registerSuccess(RegisterBean registerBean) {
+        String phone = UiTools.getText(etPhone);
         String registerInfo = GsonUtils.toJson(registerBean);
-        RealmUtils.putCache("registerResultInfo", registerInfo);
+        RealmUtils.putCache(phone + UrlConstant.CACHE_CONSTANT, registerInfo);
         finish();
     }
 

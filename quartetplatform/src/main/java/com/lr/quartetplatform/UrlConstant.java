@@ -21,10 +21,23 @@ public class UrlConstant {
     public static final String USER_REGISTRATIONINFO = BASE_URL + "user/registrationInfo";
     // 用户登录
     public static final String USER_LOGIN = BASE_URL + "user/login";
+    // 修改昵称或头像
+    public static final String USER_PROFILE = BASE_URL + "user/profile";
+    // 用户信息
+    public static final String USER_INDEX = BASE_URL + "user/index";
+    // 重置密码
+    public static final String USER_RESETPWD = BASE_URL + "user/resetpwd";
 
 
+
+    public static final String CACHE_CONSTANT = "userInfo";
+
+    public static final String CACHE_USER = "user";
+
+    public static final int LOGIN = 1;
     public static final int TEST_TIME = 10;
     public static final int RELEASE_TIME = 60;
 
-    public static final int LOGIN = 1;
+
+
 }

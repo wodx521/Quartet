@@ -49,5 +49,10 @@
     <string name="setNick">设置昵称</string>
     <string name="setSignature">修改签名</string>
     <string name="setPass">修改密码</string>
+    <string name="inputNickname">请输入昵称</string>
+    <string name="changePass">修改密码</string>
+    <string name="loginNewPass">请输入新密码</string>
+    <string name="loginNewPassAgain">请再次输入新密码</string>
+    <string name="exitSuccess">退出成功</string>
 
 </resources>

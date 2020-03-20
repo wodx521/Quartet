@@ -27,7 +27,7 @@ public abstract class GlobalApplication extends Application {
 //                .setSkinAllActivityEnable(true)
 //                .loadSkin();
         LogUtils.initLogUtils(this);
-        OkGoUtils.initOkGo(this,"");
+//        OkGoUtils.initOkGo(this,"");
         UiTools.initUiTools(this);
     }
 

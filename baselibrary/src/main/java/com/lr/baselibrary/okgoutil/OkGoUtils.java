@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 
 public class OkGoUtils {
@@ -37,6 +38,28 @@ public class OkGoUtils {
         loggingInterceptor.setColorLevel(Level.WARNING);
         builder.addInterceptor(loggingInterceptor)
                 .addInterceptor(new HeaderInterceptor())
+                .readTimeout(TIMEOUT_SECOND, TimeUnit.MILLISECONDS)
+                .writeTimeout(TIMEOUT_SECOND, TimeUnit.MILLISECONDS)
+                .connectTimeout(TIMEOUT_SECOND, TimeUnit.MILLISECONDS);
+        //cookie的缓存设置
+        spCookieStore = new SPCookieStore(application);
+        builder.cookieJar(new CookieJarImpl(spCookieStore));
+        build = builder.build();
+        OkGo.getInstance()
+                .setOkHttpClient(build)
+                .setRetryCount(0)
+                .init(application);
+    }
+
+    public static void initOkGo(Application application, Interceptor interceptor) {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor("OkGo");
+        if (BuildConfig.DEBUG) {
+            loggingInterceptor.setPrintLevel(HttpLoggingInterceptor.Level.BODY);
+        }
+        loggingInterceptor.setColorLevel(Level.WARNING);
+        builder.addInterceptor(loggingInterceptor)
+                .addInterceptor(interceptor)
                 .readTimeout(TIMEOUT_SECOND, TimeUnit.MILLISECONDS)
                 .writeTimeout(TIMEOUT_SECOND, TimeUnit.MILLISECONDS)
                 .connectTimeout(TIMEOUT_SECOND, TimeUnit.MILLISECONDS);

@@ -1,5 +1,6 @@
 package com.lr.quartetplatform.moudle4.activity;
 
+import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.EditText;
@@ -8,8 +9,10 @@ import android.widget.TextView;
 
 import com.lr.baselibrary.base.BaseMvpActivity;
 import com.lr.baselibrary.utils.GsonUtils;
+import com.lr.baselibrary.utils.SpUtils;
 import com.lr.baselibrary.utils.UiTools;
 import com.lr.quartetplatform.R;
+import com.lr.quartetplatform.UrlConstant;
 import com.lr.quartetplatform.bean.RegisterBean;
 import com.lr.quartetplatform.moudle4.presenter.LoginPresenter;
 import com.lr.quartetplatform.reaml.RealmUtils;
@@ -59,7 +62,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> {
         tvLogin.setOnClickListener(this);
         tvRegister.setOnClickListener(this);
     }
-
+private Bundle bundle = new Bundle();
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -67,7 +70,9 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> {
                 finish();
                 break;
             case R.id.tvForget:
-                startActivity(LoginActivity.this, null, ForgetPassActivity.class);
+                bundle.clear();
+                bundle.putString("type","1");
+                startActivity(LoginActivity.this, bundle, ForgetPassActivity.class);
                 break;
             case R.id.tvLogin:
                 String pass = UiTools.getText(etPass);
@@ -93,8 +98,11 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> {
     }
 
     public void loginSuccess(RegisterBean registerBean) {
+        String phone = UiTools.getText(etPhone);
+        SpUtils.put("phone",phone);
+        SpUtils.put("token",registerBean.getUserInfo().getToken());
         String registerInfo = GsonUtils.toJson(registerBean);
-        RealmUtils.putCache("registerResultInfo", registerInfo);
+        RealmUtils.putCache(phone + UrlConstant.CACHE_CONSTANT, registerInfo);
         setResult(RESULT_OK);
         finish();
     }
