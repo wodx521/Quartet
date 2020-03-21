@@ -19,6 +19,7 @@ import com.lr.quartetplatform.bean.FilterTypeBean;
 import com.lr.quartetplatform.bean.GoodsInfoBean;
 import com.lr.quartetplatform.bean.HomeTypeBean;
 import com.lr.quartetplatform.moudle1.adapter.RecommendAdapter;
+import com.lr.quartetplatform.moudle1.diglog.ChooseFilterDialog;
 import com.lr.quartetplatform.moudle1.presenter.TypeDetailPresenter;
 import com.lzy.okgo.model.HttpParams;
 
@@ -36,6 +37,7 @@ public class TypeDetailActivity extends BaseMvpActivity<TypeDetailPresenter> {
     private int count2 = 0;
     private List<GoodsInfoBean> tempGoodsInfoList;
     private FilterTypeBean mFilterTypeBean;
+    private ChooseFilterDialog chooseFilterDialog;
 
     @Override
     protected TypeDetailPresenter getPresenter() {
@@ -48,8 +50,49 @@ public class TypeDetailActivity extends BaseMvpActivity<TypeDetailPresenter> {
             HomeTypeBean typeInfo = mBundle.getParcelable("typeInfo");
             if (typeInfo != null) {
                 tvTitle.setText(typeInfo.getTitle());
+                tvTitle.setHint(typeInfo.getTitle());
             }
         }
+        // 更多过滤器弹窗
+        chooseFilterDialog = new ChooseFilterDialog(TypeDetailActivity.this);
+        chooseFilterDialog.setOrderClickListener(new ChooseFilterDialog.OrderClickListener() {
+            @Override
+            public void onConfirmListener(int type, String position) {
+                if (type == 1) {
+                    httpParams.put("type", position);
+                    tvTitle.setText(position);
+                } else {
+                    httpParams.put("type", UiTools.getText(tvTitle));
+                }
+
+                if (type == 2) {
+                    httpParams.put("langlist", position);
+                } else {
+                    httpParams.put("langlist", "");
+                }
+
+                if (type == 3) {
+                    httpParams.put("days", position);
+                } else {
+                    httpParams.put("days", "");
+                }
+                httpParams.put("sort_page_view", "");
+                httpParams.put("sort_days", "");
+                mPresenter.getTypeDetail(httpParams);
+            }
+
+            @Override
+            public void onResetListener() {
+                tvTitle.setText(UiTools.getHint(tvTitle));
+                httpParams.put("sort_page_view", "");
+                httpParams.put("sort_days", "");
+                httpParams.put("type", UiTools.getHint(tvTitle));
+                httpParams.put("days", "");
+                httpParams.put("langlist", "");
+                mPresenter.getTypeDetail(httpParams);
+            }
+        });
+
         recommendAdapter = new RecommendAdapter(TypeDetailActivity.this);
         rvAllType.setAdapter(recommendAdapter);
 
@@ -137,8 +180,9 @@ public class TypeDetailActivity extends BaseMvpActivity<TypeDetailPresenter> {
                 recommendAdapter.setGoodsInfoBeanList(goodsInfoBeanList);
                 break;
             case R.id.tvMore:
-
-
+                if (mFilterTypeBean != null) {
+                    chooseFilterDialog.getDialog(mFilterTypeBean);
+                }
                 break;
             default:
         }

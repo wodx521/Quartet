@@ -2,7 +2,6 @@ package com.lr.quartetplatform.moudle1.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.lr.baselibrary.base.BaseRecycleViewAdapter;
@@ -80,12 +78,12 @@ public class RecommendAdapter extends BaseRecycleViewAdapter {
                             int width = resource.getWidth();
                             int height = resource.getHeight();
 //                            Log.e("width_height", "width " + width + "--------height " + height);
-                            if (width > height) {
+                            if (width >= height) {
                                 recommendViewHolder.ivBack.setImageResource(R.drawable.good_pc_bg);
                                 recommendViewHolder.ivFront.setVisibility(View.INVISIBLE);
                                 recommendViewHolder.ivFront2.setVisibility(View.VISIBLE);
                                 recommendViewHolder.ivFront2.setImageBitmap(resource);
-                            } else if (width < height) {
+                            } else {
                                 recommendViewHolder.ivBack.setImageResource(R.drawable.good_phone_bg);
                                 recommendViewHolder.ivFront2.setVisibility(View.INVISIBLE);
                                 recommendViewHolder.ivFront.setVisibility(View.VISIBLE);

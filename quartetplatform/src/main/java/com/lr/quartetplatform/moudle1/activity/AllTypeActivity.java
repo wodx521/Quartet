@@ -1,5 +1,6 @@
 package com.lr.quartetplatform.moudle1.activity;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,11 +14,13 @@ import com.lr.quartetplatform.bean.HomeTypeBean;
 import com.lr.quartetplatform.moudle1.adapter.ClassificationAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AllTypeActivity extends BaseActivity {
     private TextView tvTitle;
     private ImageView ivBack;
     private ClassificationAdapter classificationAdapter;
+    private Bundle bundle = new Bundle();
 
     @Override
     protected void getNetStatus(boolean netStatus) {
@@ -40,7 +43,12 @@ public class AllTypeActivity extends BaseActivity {
         classificationAdapter.setOnItemClickListener(new BaseRecycleViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(View view, int position) {
-
+                List<HomeTypeBean> homeType = classificationAdapter.getHomeType();
+                if (homeType.size() > 0) {
+                    bundle.clear();
+                    bundle.putParcelable("typeInfo", homeType.get(position));
+                    startActivity(AllTypeActivity.this, bundle, TypeDetailActivity.class);
+                }
             }
         });
         tvTitle.setText(R.string.classification);

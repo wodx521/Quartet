@@ -1,16 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:fillViewport="true">-->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tvConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="@string/confirm"
-        android:textColor="@color/colorOrange1"
+        android:text="@string/filter"
+        android:textColor="@color/colorBlack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,16 +31,122 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckedTextView
-        android:id="@+id/tvSetAvatar"
+        android:id="@+id/tvProductStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:drawableEnd="@drawable/arrow_down"
+        android:drawableEnd="@drawable/selector_fold_expand"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
-        android:text="@string/setAvatar"
+        android:text="@string/productStyle"
         android:textColor="@color/colorBlack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvConfirm"
+        app:layout_constraintTop_toBottomOf="@id/tvCancel"
         app:layout_constraintWidth_percent="0.85" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProductStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvProductStyle"
+        app:layout_constraintWidth_percent="0.85"
+        app:spanCount="3"
+        tools:listitem="@layout/item_filter" />
+
+    <CheckedTextView
+        android:id="@+id/tvTechnology"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/selector_fold_expand"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="@string/technologyType"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvProductStyle"
+        app:layout_constraintWidth_percent="0.85" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTechnologyType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTechnology"
+        app:layout_constraintWidth_percent="0.85"
+        app:spanCount="3"
+        tools:listitem="@layout/item_filter" />
+
+    <CheckedTextView
+        android:id="@+id/tvCycle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/selector_fold_expand"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="@string/developCycle"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvTechnologyType"
+        app:layout_constraintWidth_percent="0.85" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDevelopCycle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCycle"
+        app:layout_constraintWidth_percent="0.85"
+        app:spanCount="3"
+        tools:listitem="@layout/item_filter" />
+
+    <TextView
+        android:id="@+id/tvReset"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_gray_bg25"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/reset"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvConfirm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvDevelopCycle"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <TextView
+        android:id="@+id/tvConfirm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_yellow_bg25"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/confirm"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvReset"
+        app:layout_constraintTop_toBottomOf="@id/rvDevelopCycle"
+        app:layout_constraintWidth_percent="0.4" />
+</androidx.constraintlayout.widget.ConstraintLayout><!--</androidx.core.widget.NestedScrollView>-->
