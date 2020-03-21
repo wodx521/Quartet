@@ -19,6 +19,7 @@ import com.lr.quartetplatform.bean.CustomInfoBean;
 import com.lr.quartetplatform.bean.UploadBean;
 import com.lr.quartetplatform.moudle1.adapter.UploadAdapter;
 import com.lr.quartetplatform.moudle1.diglog.ChooseTypeDialog;
+import com.lr.quartetplatform.moudle1.presenter.CustomPresenter;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;

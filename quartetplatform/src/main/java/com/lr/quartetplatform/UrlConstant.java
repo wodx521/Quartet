@@ -33,6 +33,10 @@ public class UrlConstant {
     public static final String INDEX_SUPPLIE_TYPE = BASE_URL + "index/supplie_type";
     // 入驻提交
     public static final String INDEX_SETTLEDSUPPLIERS = BASE_URL + "user/settledSuppliers";
+    // 单类型商品列表
+    public static final String SHOP_GOODSLIST = BASE_URL + "shop/goodsList";
+    // 过滤条件
+    public static final String INDEX_GOODSFILTER = BASE_URL + "index/goodsFilter";
 
 
     public static final String CACHE_CONSTANT = "userInfo";

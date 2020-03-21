@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <TextView
+        android:id="@+id/tvSortTotal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="6dp"
+        android:text="@string/sortTotal"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toStartOf="@id/tvViewNum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <CheckedTextView
+        android:id="@+id/tvViewNum"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:drawableEnd="@drawable/selector_up_down"
+        android:drawablePadding="3dp"
+        android:gravity="center"
+        android:padding="6dp"
+        android:text="@string/viewNum"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toStartOf="@id/tvCycle"
+        app:layout_constraintStart_toEndOf="@id/tvSortTotal"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <CheckedTextView
+        android:id="@+id/tvCycle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:drawableEnd="@drawable/selector_up_down"
+        android:drawablePadding="3dp"
+        android:gravity="center"
+        android:padding="6dp"
+        android:text="@string/cycle"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toStartOf="@id/tvMore"
+        app:layout_constraintStart_toEndOf="@id/tvViewNum"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvMore"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="6dp"
+        android:text="@string/more"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvCycle"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="tvMore,tvCycle,tvSortTotal,tvViewNum" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAllType"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrier"
+        tools:listitem="@layout/item_recommend" />
+</androidx.constraintlayout.widget.ConstraintLayout>

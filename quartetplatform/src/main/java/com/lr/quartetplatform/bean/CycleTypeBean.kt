@@ -4,8 +4,5 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class HomeTypeBean(var title: String? = "",
-                   var img: String? = ""):Parcelable {
-
-
-}
+class CycleTypeBean(var name: String? = "",
+                    var value: String? = ""):Parcelable

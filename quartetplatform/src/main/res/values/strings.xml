@@ -63,5 +63,10 @@
     <string name="inputContactName">请输入联系人姓名</string>
     <string name="inputContactPhone">请输入您的联系电话</string>
     <string name="chooseProjectType">请选择主营类型</string>
+    <string name="classification">分类</string>
+    <string name="sortTotal">综合排序</string>
+    <string name="more">更多</string>
+    <string name="cycle">周期</string>
+    <string name="viewNum">浏览量</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.lr.quartetplatform.moudle1.activity;
+package com.lr.quartetplatform.moudle1.presenter;
 
 import com.google.gson.reflect.TypeToken;
 import com.lr.baselibrary.base.BasePresenterImpl;
@@ -10,6 +10,7 @@ import com.lr.quartetplatform.UrlConstant;
 import com.lr.quartetplatform.bean.CustomInfoBean;
 import com.lr.quartetplatform.bean.CustomResult;
 import com.lr.quartetplatform.bean.UploadBean;
+import com.lr.quartetplatform.moudle1.activity.CustomActivity;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.request.base.Request;
 

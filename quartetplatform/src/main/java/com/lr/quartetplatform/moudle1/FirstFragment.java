@@ -10,18 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.lr.baselibrary.base.BaseMvpFragment;
+import com.lr.baselibrary.base.BaseRecycleViewAdapter;
 import com.lr.baselibrary.glidetools.GlideApp;
-import com.lr.baselibrary.utils.UiTools;
 import com.lr.quartetplatform.R;
 import com.lr.quartetplatform.UrlConstant;
 import com.lr.quartetplatform.bean.GoodsInfoBean;
 import com.lr.quartetplatform.bean.HomeInfoBean;
 import com.lr.quartetplatform.bean.HomeTypeBean;
+import com.lr.quartetplatform.moudle1.activity.AllTypeActivity;
 import com.lr.quartetplatform.moudle1.activity.CustomActivity;
-import com.lr.quartetplatform.moudle1.activity.WebActivity;
+import com.lr.quartetplatform.moudle1.activity.TypeDetailActivity;
 import com.lr.quartetplatform.moudle1.adapter.ClassificationAdapter;
 import com.lr.quartetplatform.moudle1.adapter.ImageAdapter;
 import com.lr.quartetplatform.moudle1.adapter.RecommendAdapter;
+import com.lr.quartetplatform.moudle1.presenter.FirstPresenter;
 import com.lr.quartetplatform.moudle4.activity.MyJoinActivity;
 import com.youth.banner.Banner;
 
@@ -44,6 +46,7 @@ public class FirstFragment extends BaseMvpFragment<FirstPresenter> {
     private RecommendAdapter recommendAdapter;
     private ClassificationAdapter classificationAdapter;
     private Bundle bundle = new Bundle();
+    private List<HomeTypeBean> homeType;
 
     @Override
     protected FirstPresenter getPresenter() {
@@ -75,8 +78,6 @@ public class FirstFragment extends BaseMvpFragment<FirstPresenter> {
         imageAdapter = new ImageAdapter(new ArrayList<String>());
         banner.setAdapter(imageAdapter);
         recommendAdapter = new RecommendAdapter(getActivity());
-        rvRecommend.setAdapter(recommendAdapter);
-        rvRecommend.setHasFixedSize(true);
         rvRecommend.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -84,13 +85,32 @@ public class FirstFragment extends BaseMvpFragment<FirstPresenter> {
                 if (newState == SCROLL_STATE_IDLE) { // 滚动静止时才加载图片资源，极大提升流畅度
                     recommendAdapter.setScrolling(false);
                     recommendAdapter.notifyDataSetChanged(); // notify调用后onBindViewHolder会响应调用
-                } else
+                } else {
                     recommendAdapter.setScrolling(true);
+                }
                 super.onScrollStateChanged(recyclerView, newState);
             }
         });
+        rvRecommend.setHasFixedSize(true);
+        rvRecommend.setAdapter(recommendAdapter);
+
+
         classificationAdapter = new ClassificationAdapter(getActivity());
         rvClassification.setAdapter(classificationAdapter);
+        classificationAdapter.setOnItemClickListener(new BaseRecycleViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClickListener(View view, int position) {
+                if (position < 4) {
+                    bundle.clear();
+                    bundle.putParcelable("typeInfo", homeType.get(position));
+                    startActivity(FirstFragment.this, bundle, TypeDetailActivity.class);
+                } else {
+                    bundle.clear();
+                    bundle.putParcelableArrayList("allType", (ArrayList) homeType);
+                    startActivity(FirstFragment.this, bundle, AllTypeActivity.class);
+                }
+            }
+        });
         GlideApp.with(FirstFragment.this)
                 .load(R.drawable.home_middle)
                 .into(ivBg);
@@ -136,12 +156,12 @@ public class FirstFragment extends BaseMvpFragment<FirstPresenter> {
                 if (tlChoose.getSelectedTabPosition() == 0) {
                     // 找软件
                     bundle.clear();
-                    bundle.putString("url","http://nztadmin.jinjifuweng.com/#/pages/custom/custom");
+                    bundle.putString("url", "http://nztadmin.jinjifuweng.com/#/pages/custom/custom");
                     startActivity(FirstFragment.this, bundle, CustomActivity.class);
                 } else if (tlChoose.getSelectedTabPosition() == 1) {
                     // 加联盟
                     bundle.clear();
-                    bundle.putString("url","http://nztadmin.jinjifuweng.com/#/pages/my/supplier");
+                    bundle.putString("url", "http://nztadmin.jinjifuweng.com/#/pages/my/supplier");
                     startActivity(FirstFragment.this, null, MyJoinActivity.class);
                 }
                 break;
@@ -165,7 +185,7 @@ public class FirstFragment extends BaseMvpFragment<FirstPresenter> {
 
     public void setHomeInfo(HomeInfoBean homeInfoBean) {
         tempHomeType.clear();
-        List<HomeTypeBean> homeType = homeInfoBean.getHomeType();
+        homeType = homeInfoBean.getHomeType();
         homeNav = homeInfoBean.getHomeNav();
         List<HomeTypeBean> homeRecommend = homeInfoBean.getHomeRecommend();
         if (homeType != null && homeType.size() > 0) {

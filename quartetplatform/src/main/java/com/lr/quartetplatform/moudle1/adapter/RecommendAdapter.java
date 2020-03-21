@@ -73,13 +73,13 @@ public class RecommendAdapter extends BaseRecycleViewAdapter {
             GlideApp.with(mContext)
                     .asBitmap()//强制Glide返回一个Bitmap对象
                     .load(UrlConstant.IMAGE_BASE_URL + homeImage)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .into(new SimpleTarget<Bitmap>() {
                         @Override
                         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                             int width = resource.getWidth();
                             int height = resource.getHeight();
-                            Log.e("width_height", "width " + width + "--------height " + height);
+//                            Log.e("width_height", "width " + width + "--------height " + height);
                             if (width > height) {
                                 recommendViewHolder.ivBack.setImageResource(R.drawable.good_pc_bg);
                                 recommendViewHolder.ivFront.setVisibility(View.INVISIBLE);
