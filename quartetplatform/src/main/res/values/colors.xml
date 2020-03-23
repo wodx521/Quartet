@@ -11,9 +11,15 @@
 
     <color name="colorGray">#CCCCCC</color>
     <color name="colorGray1">#8F8F8F</color>
+    <color name="colorGray2">#80CCCCCC</color>
+    <color name="colorGray3">#4DCCCCCC</color>
 
     <color name="colorOrange">#FF6F00</color>
     <color name="colorOrange1">#F9C349</color>
     <color name="colorOrange2">#FEF9ED</color>
+    <color name="colorOrange3">#FFF7F1</color>
+
+    <color name="colorRed1">#FD6464</color>
+    <color name="colorRed2">#FC3837</color>
 
 </resources>

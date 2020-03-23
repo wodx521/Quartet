@@ -73,5 +73,21 @@
     <string name="developCycle">开发周期</string>
     <string name="filter">筛选</string>
     <string name="reset">重置</string>
+    <string name="productFeatures">产品功能</string>
+    <string name="reservationDes">预约专人答疑,一对一服务</string>
+    <string name="mainFeatures">核心特色</string>
+    <string name="interfaceDisplay">界面展示</string>
+    <string name="saleService">售后保障</string>
+    <string name="recommendManager">推荐经理人</string>
+    <string name="otherProject">其他相似项目</string>
+    <string name="msgContact">在线咨询</string>
+    <string name="phoneContact">电话咨询</string>
+    <string name="clickDemo">点击查看演示</string>
+    <string name="chooseTime">选择时间</string>
+    <string name="chooseData">选择日期</string>
+    <string name="wantTime">期望演示时间</string>
+    <string name="yourContactPhone">您的联系方式</string>
+    <string name="reservationNow">立即预约</string>
+    <string name="reservation">预约</string>
 
 </resources>

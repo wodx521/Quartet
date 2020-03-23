@@ -17,14 +17,15 @@ import com.lr.baselibrary.glidetools.GlideApp;
 import com.lr.baselibrary.utils.UiTools;
 import com.lr.quartetplatform.R;
 import com.lr.quartetplatform.UrlConstant;
-import com.lr.quartetplatform.bean.GoodsInfoBean;
+import com.lr.quartetplatform.bean.GoodDetailBean;
+import com.lr.quartetplatform.bean.GoodDetailBean;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecommendAdapter extends BaseRecycleViewAdapter {
-    private List<GoodsInfoBean> goodsInfoBeanList;
+    private List<GoodDetailBean> GoodDetailBeanList;
 
     public RecommendAdapter(Context context) {
         super(context);
@@ -43,15 +44,15 @@ public class RecommendAdapter extends BaseRecycleViewAdapter {
     @Override
     protected void bindClickListener(RecyclerView.ViewHolder viewHolder, final int position) {
         final RecommendViewHolder recommendViewHolder = (RecommendViewHolder) viewHolder;
-        GoodsInfoBean goodsInfoBean = goodsInfoBeanList.get(position);
-        String name = goodsInfoBean.getName();
-        String homeImage = goodsInfoBean.getHomeimage();
-        String price = goodsInfoBean.getPrice();
-        String type = goodsInfoBean.getType();
-        String pageView = goodsInfoBean.getPageView();
-        String discount = goodsInfoBean.getDiscount();
-        List<String> label = goodsInfoBean.getLabel();
-        String days = goodsInfoBean.getDays();
+        GoodDetailBean GoodDetailBean = GoodDetailBeanList.get(position);
+        String name = GoodDetailBean.getName();
+        String homeImage = GoodDetailBean.getHomeimage();
+        String price = GoodDetailBean.getPrice();
+        String type = GoodDetailBean.getType();
+        String pageView = GoodDetailBean.getPageView();
+        String discount = GoodDetailBean.getDiscount();
+        List<String> label = GoodDetailBean.getLabel();
+        String days = GoodDetailBean.getDays();
 
         recommendViewHolder.tvProduceName.setText(name);
         recommendViewHolder.tvType.setText(type);
@@ -98,22 +99,22 @@ public class RecommendAdapter extends BaseRecycleViewAdapter {
 //        }
     }
 
-    public List<GoodsInfoBean> getGoodsInfoBeanList() {
-        if (goodsInfoBeanList == null) {
-            goodsInfoBeanList = new ArrayList<>();
+    public List<GoodDetailBean> getGoodDetailBeanList() {
+        if (GoodDetailBeanList == null) {
+            GoodDetailBeanList = new ArrayList<>();
         }
-        return goodsInfoBeanList;
+        return GoodDetailBeanList;
     }
 
-    public void setGoodsInfoBeanList(List<GoodsInfoBean> goodsInfoBeanList) {
-        this.goodsInfoBeanList = goodsInfoBeanList;
+    public void setGoodDetailBeanList(List<GoodDetailBean> GoodDetailBeanList) {
+        this.GoodDetailBeanList = GoodDetailBeanList;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        if (goodsInfoBeanList != null && goodsInfoBeanList.size() > 0) {
-            return goodsInfoBeanList.size();
+        if (GoodDetailBeanList != null && GoodDetailBeanList.size() > 0) {
+            return GoodDetailBeanList.size();
         }
         return 0;
     }

@@ -53,7 +53,7 @@ public class WebActivity extends AppCompatActivity {
         //缩放至屏幕的大小
         settings.setLoadWithOverviewMode(true);
         //自适应屏幕
-        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
         settings.getAllowFileAccess();
         settings.setAllowFileAccess(true);
     }

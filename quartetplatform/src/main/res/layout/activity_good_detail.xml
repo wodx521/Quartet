@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@id/clButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivBg"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_mobile"
+                app:layout_constraintDimensionRatio="W,1:1.875"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivFront"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="@id/ivBg"
+                app:layout_constraintDimensionRatio="W,1.77:1"
+                app:layout_constraintEnd_toEndOf="@id/ivBg"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="@id/ivBg"
+                app:layout_constraintTop_toTopOf="@id/ivBg"
+                app:layout_constraintWidth_percent="0.21" />
+
+            <ImageView
+                android:id="@+id/ivFront2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/ivBg"
+                app:layout_constraintDimensionRatio="W,1:1.57"
+                app:layout_constraintEnd_toEndOf="@id/ivBg"
+                app:layout_constraintStart_toStartOf="@id/ivBg"
+                app:layout_constraintTop_toTopOf="@id/ivBg"
+                app:layout_constraintVertical_bias="0.4"
+                app:layout_constraintWidth_percent="0.53" />
+
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivBg" />
+
+            <TextView
+                android:id="@+id/tvProductDes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvProductName" />
+
+            <TextView
+                android:id="@+id/tvProductPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@id/barrier1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvProductDes" />
+
+            <TextView
+                android:id="@+id/tvViewDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/shape_orange_bg25"
+                android:paddingStart="8dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="3dp"
+                android:text="@string/clickDemo"
+                android:textColor="@color/colorWhite"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@id/barrier1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvProductDes" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="tvProductPrice,tvViewDetail" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFeatures"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                android:padding="3dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/barrier1"
+                tools:listitem="@layout/item_label" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:background="@color/colorGray2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvFeatures" />
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:text="@string/productFeatures"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view1" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvProductFeatures"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv1"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_image" />
+
+            <TextView
+                android:id="@+id/tvProductFeatures"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv1" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:background="@color/colorGray2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvProductFeatures" />
+
+            <TextView
+                android:id="@+id/tvReservation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_yue"
+                android:drawableEnd="@drawable/arrow_right"
+                android:drawablePadding="5dp"
+                android:gravity="start"
+                android:paddingStart="10dp"
+                android:paddingTop="13dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="13dp"
+                android:text="@string/reservationDes"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view2" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:background="@color/colorGray2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvReservation" />
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:text="@string/mainFeatures"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view3" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMainFeatures"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:padding="3dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv2"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_main_features" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:background="@color/colorGray2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvMainFeatures" />
+
+            <TextView
+                android:id="@+id/tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:text="@string/interfaceDisplay"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view4" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvInterface1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:padding="3dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv3"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_image" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvInterface2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:padding="3dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvInterface1"
+                app:spanCount="2"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_image" />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:background="@color/colorGray2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvInterface2" />
+
+            <ImageView
+                android:id="@+id/iv1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/colorWhite"
+                android:scaleType="centerCrop"
+                android:src="@drawable/shbz"
+                app:layout_constraintDimensionRatio="W,1:2.65"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view5"
+                tools:ignore="ContentDescription" />
+
+            <View
+                android:id="@+id/view6"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:background="@color/colorGray2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv1" />
+
+            <TextView
+                android:id="@+id/tv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:text="@string/recommendManager"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view6" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRecommend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:padding="3dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv4"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_recommend_manager" />
+
+            <View
+                android:id="@+id/view7"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:background="@color/colorGray2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvRecommend" />
+
+            <TextView
+                android:id="@+id/tv5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:text="@string/otherProject"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view7" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvOther"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                android:padding="3dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv5"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_other_project" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.lr.baselibrary.weight.CircleImageView
+            android:id="@+id/ivHead"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/avatar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvManagerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivHead"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/shape_orange_frame5"
+            android:padding="8dp"
+            android:src="@drawable/msg"
+            android:text="@string/msgContact"
+            android:textColor="@color/colorOrange1"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvPhoneContact"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvPhoneContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@drawable/shape_orange2_bg5"
+            android:padding="8dp"
+            android:text="@string/phoneContact"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

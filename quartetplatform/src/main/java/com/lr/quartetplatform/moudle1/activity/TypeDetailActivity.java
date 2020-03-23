@@ -16,7 +16,7 @@ import com.lr.quartetplatform.R;
 import com.lr.quartetplatform.ViewDownSort;
 import com.lr.quartetplatform.ViewUpSort;
 import com.lr.quartetplatform.bean.FilterTypeBean;
-import com.lr.quartetplatform.bean.GoodsInfoBean;
+import com.lr.quartetplatform.bean.GoodDetailBean;
 import com.lr.quartetplatform.bean.HomeTypeBean;
 import com.lr.quartetplatform.moudle1.adapter.RecommendAdapter;
 import com.lr.quartetplatform.moudle1.diglog.ChooseFilterDialog;
@@ -35,7 +35,7 @@ public class TypeDetailActivity extends BaseMvpActivity<TypeDetailPresenter> {
     private HttpParams httpParams = new HttpParams();
     private int count1 = 0;
     private int count2 = 0;
-    private List<GoodsInfoBean> tempGoodsInfoList;
+    private List<GoodDetailBean> tempGoodsInfoList;
     private FilterTypeBean mFilterTypeBean;
     private ChooseFilterDialog chooseFilterDialog;
 
@@ -139,7 +139,7 @@ public class TypeDetailActivity extends BaseMvpActivity<TypeDetailPresenter> {
 
     @Override
     public void onClick(View v) {
-        List<GoodsInfoBean> goodsInfoBeanList;
+        List<GoodDetailBean> GoodDetailBeanList;
         switch (v.getId()) {
             case R.id.ivBack:
                 finish();
@@ -150,34 +150,34 @@ public class TypeDetailActivity extends BaseMvpActivity<TypeDetailPresenter> {
                 tvViewNum.setSelected(false);
                 tvCycle.setSelected(false);
                 if (tempGoodsInfoList != null && tempGoodsInfoList.size() > 0) {
-                    recommendAdapter.setGoodsInfoBeanList(tempGoodsInfoList);
+                    recommendAdapter.setGoodDetailBeanList(tempGoodsInfoList);
                 }
                 break;
             case R.id.tvViewNum:
-                goodsInfoBeanList = recommendAdapter.getGoodsInfoBeanList();
+                GoodDetailBeanList = recommendAdapter.getGoodDetailBeanList();
                 if (count1 % 2 == 0) {
-                    Collections.sort(goodsInfoBeanList, new ViewUpSort());
+                    Collections.sort(GoodDetailBeanList, new ViewUpSort());
                 } else {
-                    Collections.sort(goodsInfoBeanList, new ViewDownSort());
+                    Collections.sort(GoodDetailBeanList, new ViewDownSort());
                 }
                 tvViewNum.setSelected(true);
                 tvCycle.setSelected(false);
                 tvViewNum.setChecked(count1 % 2 == 0);
                 count1 += 1;
-                recommendAdapter.setGoodsInfoBeanList(goodsInfoBeanList);
+                recommendAdapter.setGoodDetailBeanList(GoodDetailBeanList);
                 break;
             case R.id.tvCycle:
-                goodsInfoBeanList = recommendAdapter.getGoodsInfoBeanList();
+                GoodDetailBeanList = recommendAdapter.getGoodDetailBeanList();
                 if (count2 % 2 == 0) {
-                    Collections.sort(goodsInfoBeanList, new CycleUpSort());
+                    Collections.sort(GoodDetailBeanList, new CycleUpSort());
                 } else {
-                    Collections.sort(goodsInfoBeanList, new CycleDownSort());
+                    Collections.sort(GoodDetailBeanList, new CycleDownSort());
                 }
                 tvCycle.setSelected(true);
                 tvViewNum.setSelected(false);
                 tvCycle.setChecked(count2 % 2 == 0);
                 count2 += 1;
-                recommendAdapter.setGoodsInfoBeanList(goodsInfoBeanList);
+                recommendAdapter.setGoodDetailBeanList(GoodDetailBeanList);
                 break;
             case R.id.tvMore:
                 if (mFilterTypeBean != null) {
@@ -188,9 +188,9 @@ public class TypeDetailActivity extends BaseMvpActivity<TypeDetailPresenter> {
         }
     }
 
-    public void setGoodsInfo(List<GoodsInfoBean> goodsInfoBeanList) {
-        this.tempGoodsInfoList = goodsInfoBeanList;
-        recommendAdapter.setGoodsInfoBeanList(goodsInfoBeanList);
+    public void setGoodsInfo(List<GoodDetailBean> GoodDetailBeanList) {
+        this.tempGoodsInfoList = GoodDetailBeanList;
+        recommendAdapter.setGoodDetailBeanList(GoodDetailBeanList);
     }
 
     public void setFilterList(FilterTypeBean filterTypeBean) {

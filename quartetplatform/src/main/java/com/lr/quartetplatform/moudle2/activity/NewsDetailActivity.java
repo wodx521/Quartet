@@ -1,6 +1,7 @@
 package com.lr.quartetplatform.moudle2.activity;
 
 import android.text.Html;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,8 +14,8 @@ import com.lr.quartetplatform.moudle2.presenter.NewsDetailPresenter;
 
 public class NewsDetailActivity extends BaseMvpActivity<NewsDetailPresenter> {
     private ImageView ivTop;
-    private TextView tvTop;
-    private TextView tvNewsContent;
+    private TextView tvTop, tvNewsContent, tvTitle;
+    private ImageView ivBack;
 
     @Override
     protected NewsDetailPresenter getPresenter() {
@@ -25,7 +26,6 @@ public class NewsDetailActivity extends BaseMvpActivity<NewsDetailPresenter> {
     protected void initData() {
         if (mBundle != null) {
             String id = mBundle.getString("id");
-
             mPresenter.getNewsDetail(id);
         }
     }
@@ -39,7 +39,18 @@ public class NewsDetailActivity extends BaseMvpActivity<NewsDetailPresenter> {
     protected void initView() {
         ivTop = findViewById(R.id.ivTop);
         tvTop = findViewById(R.id.tvTop);
+        tvTitle = findViewById(R.id.tvTitle);
+        ivBack = findViewById(R.id.ivBack);
         tvNewsContent = findViewById(R.id.tvNewsContent);
+
+        ivBack.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.ivBack) {
+            finish();
+        }
     }
 
     public void setNewsDetail(NewsDetailBean newsDetailBean) {
@@ -47,6 +58,7 @@ public class NewsDetailActivity extends BaseMvpActivity<NewsDetailPresenter> {
                 .load(newsDetailBean.getCover())
                 .into(ivTop);
         tvTop.setText(newsDetailBean.getTitle());
-        tvNewsContent.setText(Html.fromHtml(newsDetailBean.getContent(),new HtmlImageGetter(NewsDetailActivity.this,tvNewsContent),null));
+        tvTitle.setText(newsDetailBean.getTitle());
+        tvNewsContent.setText(Html.fromHtml(newsDetailBean.getContent(), new HtmlImageGetter(NewsDetailActivity.this, tvNewsContent, false), null));
     }
 }

@@ -7,7 +7,8 @@ import com.lr.baselibrary.bean.SimpleResponse;
 import com.lr.baselibrary.okgoutil.CustomizeStringCallback;
 import com.lr.baselibrary.okgoutil.OkGoUtils;
 import com.lr.quartetplatform.UrlConstant;
-import com.lr.quartetplatform.bean.GoodsInfoBean;
+import com.lr.quartetplatform.bean.GoodDetailBean;
+import com.lr.quartetplatform.bean.GoodDetailBean;
 import com.lr.quartetplatform.bean.HomeInfoBean;
 import com.lr.quartetplatform.moudle1.FirstFragment;
 import com.lzy.okgo.request.base.Request;
@@ -82,14 +83,14 @@ public class FirstPresenter extends BasePresenterImpl<FirstFragment> {
         OkGoUtils.postRequest(UrlConstant.GOODS_LIST, "goodsList", null, new CustomizeStringCallback() {
             @Override
             public Type getResultType() {
-                return new TypeToken<GeneralResult<List<GoodsInfoBean>>>() {
+                return new TypeToken<GeneralResult<List<GoodDetailBean>>>() {
                 }.getType();
             }
 
             @Override
             public void onRequestSuccess(GeneralResult generalResult) {
-                List<GoodsInfoBean> goodsInfoBeanList = (List<GoodsInfoBean>) generalResult.data;
-                mPresenterView.setGoodsInfo(goodsInfoBeanList);
+                List<GoodDetailBean> GoodDetailBeanList = (List<GoodDetailBean>) generalResult.data;
+                mPresenterView.setGoodsInfo(GoodDetailBeanList);
             }
 
             @Override

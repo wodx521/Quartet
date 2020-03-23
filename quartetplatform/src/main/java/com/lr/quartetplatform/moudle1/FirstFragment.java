@@ -14,11 +14,13 @@ import com.lr.baselibrary.base.BaseRecycleViewAdapter;
 import com.lr.baselibrary.glidetools.GlideApp;
 import com.lr.quartetplatform.R;
 import com.lr.quartetplatform.UrlConstant;
-import com.lr.quartetplatform.bean.GoodsInfoBean;
+import com.lr.quartetplatform.bean.GoodDetailBean;
+import com.lr.quartetplatform.bean.GoodDetailBean;
 import com.lr.quartetplatform.bean.HomeInfoBean;
 import com.lr.quartetplatform.bean.HomeTypeBean;
 import com.lr.quartetplatform.moudle1.activity.AllTypeActivity;
 import com.lr.quartetplatform.moudle1.activity.CustomActivity;
+import com.lr.quartetplatform.moudle1.activity.GoodsDetailActivity;
 import com.lr.quartetplatform.moudle1.activity.TypeDetailActivity;
 import com.lr.quartetplatform.moudle1.adapter.ClassificationAdapter;
 import com.lr.quartetplatform.moudle1.adapter.ImageAdapter;
@@ -93,6 +95,19 @@ public class FirstFragment extends BaseMvpFragment<FirstPresenter> {
         });
         rvRecommend.setHasFixedSize(true);
         rvRecommend.setAdapter(recommendAdapter);
+
+        recommendAdapter.setOnItemClickListener(new BaseRecycleViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClickListener(View view, int position) {
+                List<GoodDetailBean> GoodDetailBeanList = recommendAdapter.getGoodDetailBeanList();
+                GoodDetailBean goodDetailBean = GoodDetailBeanList.get(position);
+
+                bundle.putParcelable("goodInfo",goodDetailBean);
+                bundle.putString("id",goodDetailBean.getId());
+                bundle.putString("profuceName",goodDetailBean.getName());
+                startActivity(FirstFragment.this,bundle, GoodsDetailActivity.class);
+            }
+        });
 
 
         classificationAdapter = new ClassificationAdapter(getActivity());
@@ -198,7 +213,7 @@ public class FirstFragment extends BaseMvpFragment<FirstPresenter> {
         }
     }
 
-    public void setGoodsInfo(List<GoodsInfoBean> goodsInfoBeanList) {
-        recommendAdapter.setGoodsInfoBeanList(goodsInfoBeanList);
+    public void setGoodsInfo(List<GoodDetailBean> GoodDetailBeanList) {
+        recommendAdapter.setGoodDetailBeanList(GoodDetailBeanList);
     }
 }

@@ -37,6 +37,10 @@ public class UrlConstant {
     public static final String SHOP_GOODSLIST = BASE_URL + "shop/goodsList";
     // 过滤条件
     public static final String INDEX_GOODSFILTER = BASE_URL + "index/goodsFilter";
+    // 商品详情
+    public static final String SHOP_GOODSDETAIL = BASE_URL + "shop/goodsDetail";
+    // 经理人
+    public static final String SHOP_BPS = BASE_URL + "shop/bps";
     // 新闻地址
     public static final String NEWS_BANNER = "https://unidemo.dcloud.net.cn/api/banner/36kr";
     // 新闻列表

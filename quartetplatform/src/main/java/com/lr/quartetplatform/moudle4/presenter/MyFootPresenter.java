@@ -8,7 +8,7 @@ import com.lr.baselibrary.okgoutil.CustomizeStringCallback;
 import com.lr.baselibrary.okgoutil.OkGoUtils;
 import com.lr.baselibrary.utils.UiTools;
 import com.lr.quartetplatform.UrlConstant;
-import com.lr.quartetplatform.bean.GoodsInfoBean;
+import com.lr.quartetplatform.bean.GoodDetailBean;
 import com.lr.quartetplatform.moudle4.activity.MyFootActivity;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.request.base.Request;
@@ -21,13 +21,13 @@ public class MyFootPresenter extends BasePresenterImpl<MyFootActivity> {
         OkGoUtils.postRequest(UrlConstant.SHOP_MYGOODSLIST, "myFoot", httpParams, new CustomizeStringCallback() {
             @Override
             public Type getResultType() {
-                return new TypeToken<GeneralResult<List<GoodsInfoBean>>>() {
+                return new TypeToken<GeneralResult<List<GoodDetailBean>>>() {
                 }.getType();
             }
 
             @Override
             public void onRequestSuccess(GeneralResult generalResult) {
-                List<GoodsInfoBean> goodsList = (List<GoodsInfoBean>) generalResult.data;
+                List<GoodDetailBean> goodsList = (List<GoodDetailBean>) generalResult.data;
                 mPresenterView.setMyFoot(goodsList);
             }
 

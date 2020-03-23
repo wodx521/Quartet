@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.lr.baselibrary.base.BaseMvpActivity;
 import com.lr.baselibrary.base.BaseRecycleViewAdapter;
 import com.lr.quartetplatform.R;
-import com.lr.quartetplatform.bean.GoodsInfoBean;
+import com.lr.quartetplatform.bean.GoodDetailBean;
 import com.lr.quartetplatform.moudle1.adapter.RecommendAdapter;
 import com.lr.quartetplatform.moudle4.presenter.MyFootPresenter;
 import com.lzy.okgo.model.HttpParams;
@@ -68,8 +68,8 @@ public class MyFootActivity extends BaseMvpActivity<MyFootPresenter> {
         }
     }
 
-    public void setMyFoot(List<GoodsInfoBean> goodsList) {
-        recommendAdapter.setGoodsInfoBeanList(goodsList);
+    public void setMyFoot(List<GoodDetailBean> goodsList) {
+        recommendAdapter.setGoodDetailBeanList(goodsList);
     }
 
     public void loginTimeOut() {

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.lr.baselibrary.base.BaseMvpFragment;
 import com.lr.baselibrary.base.BaseRecycleViewAdapter;
 import com.lr.baselibrary.glidetools.GlideApp;
+import com.lr.baselibrary.utils.UiTools;
 import com.lr.quartetplatform.R;
 import com.lr.quartetplatform.bean.NewsBannerBean;
 import com.lr.quartetplatform.moudle2.activity.NewsDetailActivity;
@@ -35,6 +36,7 @@ public class SecondFragment extends BaseMvpFragment<SecondPresneter> {
     private NewsListAdapter newsListAdapter;
     private List<NewsBannerBean> tempNewslist = new ArrayList<>();
     private Bundle bundle = new Bundle();
+    private String postId;
 
     @Override
     protected SecondPresneter getPresenter() {
@@ -47,6 +49,21 @@ public class SecondFragment extends BaseMvpFragment<SecondPresneter> {
         tvTop = view.findViewById(R.id.tvTop);
         srlRefresh = view.findViewById(R.id.srlRefresh);
         rvNews = view.findViewById(R.id.rvNews);
+    }
+
+    @Override
+    protected void initClickListener() {
+        ivTop.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() ==R.id.ivTop) {
+            if (UiTools.noEmpty(postId)) {
+                bundle.putString("id", postId);
+                startActivity(SecondFragment.this, bundle, NewsDetailActivity.class);
+            }
+        }
     }
 
     @Override
@@ -98,6 +115,7 @@ public class SecondFragment extends BaseMvpFragment<SecondPresneter> {
     public void setNewsBanner(NewsBannerBean newsBannerBean) {
         String title = newsBannerBean.getTitle();
         String cover = newsBannerBean.getCover();
+        postId = newsBannerBean.getPostId();
         tvTop.setText(title);
         GlideApp.with(SecondFragment.this)
                 .load(cover)
