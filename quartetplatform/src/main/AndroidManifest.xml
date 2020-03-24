@@ -34,22 +34,75 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".moudle1.activity.CustomActivity" />
-        <activity android:name=".moudle1.activity.WebActivity" />
-        <activity android:name=".moudle4.activity.LoginActivity" />
-        <activity android:name=".moudle4.activity.ForgetPassActivity" />
-        <activity android:name=".moudle4.activity.RegisterActivity" />
-        <activity android:name=".moudle4.activity.ProtocolActivity" />
-        <activity android:name=".moudle4.activity.SettingActivity" />
-        <activity android:name=".moudle4.activity.SetNickNameActivity" />
-        <activity android:name=".moudle4.activity.MyFootActivity" />
-        <activity android:name=".moudle4.activity.MyScheduleActivity" />
-        <activity android:name=".moudle4.activity.MyJoinActivity" />
-        <activity android:name=".moudle1.activity.AllTypeActivity" />
-        <activity android:name=".moudle1.activity.TypeDetailActivity" />
-        <activity android:name=".moudle2.activity.NewsDetailActivity" />
-        <activity android:name=".moudle1.activity.GoodsDetailActivity" />
-        <activity android:name=".moudle1.activity.ReservationActivity" />
+        <activity
+            android:name=".moudle1.activity.CustomActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle1.activity.WebActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle4.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle4.activity.ForgetPassActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle4.activity.RegisterActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle4.activity.ProtocolActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle4.activity.SettingActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle4.activity.SetNickNameActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle4.activity.MyFootActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle4.activity.MyScheduleActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle4.activity.MyJoinActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle1.activity.AllTypeActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle1.activity.TypeDetailActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle2.activity.NewsDetailActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle1.activity.GoodsDetailActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle1.activity.ReservationActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".moudle3.activity.ChatDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateUnspecified"
+            tools:ignore="LockedOrientationActivity" />
 
         <meta-data
             android:name="design_width_in_dp"

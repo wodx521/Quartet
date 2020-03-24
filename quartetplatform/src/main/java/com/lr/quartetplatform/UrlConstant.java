@@ -43,6 +43,18 @@ public class UrlConstant {
     public static final String SHOP_BPS = BASE_URL + "shop/bps";
     // 预约服务
     public static final String USER_FORWARD = BASE_URL + "user/forward";
+    // 联系列表
+    public static final String CHAT_LIST = BASE_URL + "Chats/chat_list";
+    // 聊天列表
+    public static final String CHAT_INFO = BASE_URL + "Chats/chat_info";
+    // 发送消息
+    public static final String USER_CHAT = BASE_URL + "Chats/user_chat";
+    // 收藏
+    public static final String SET_CONCERN = BASE_URL + "user/setConsern";
+    // 查询聊天
+    public static final String CHATS_SEEK = BASE_URL + "Chats/seek";
+    // 我的收藏
+    public static final String MY_CONSERN = BASE_URL + "user/myConsern";
     // 新闻地址
     public static final String NEWS_BANNER = "https://unidemo.dcloud.net.cn/api/banner/36kr";
     // 新闻列表

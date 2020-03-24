@@ -25,6 +25,7 @@
     <string name="myFoot">我的足迹</string>
     <string name="customPrivate">私人定制</string>
     <string name="mySchedule">我的进度</string>
+    <string name="myConcern">我的收藏</string>
     <string name="shopJoin">商家入驻</string>
     <string name="inputAccount">请输入账号</string>
     <string name="inputPass">请输入密码</string>
@@ -90,5 +91,11 @@
     <string name="reservationNow">立即预约</string>
     <string name="reservation">预约</string>
     <string name="reservationSuccess">您已预约成功，请等待客户经理致电</string>
+    <string name="sendContent">发送</string>
+    <string name="callPhone">语音通话</string>
+    <string name="inputChatContent">请输入聊天内容</string>
+    <string name="noMsg">您还未收到消息</string>
+    <string name="noFoot">还没有浏览商品</string>
+    <string name="noConcern">还没有收藏商品</string>
 
 </resources>

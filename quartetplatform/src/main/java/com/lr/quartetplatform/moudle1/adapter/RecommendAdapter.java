@@ -2,6 +2,8 @@ package com.lr.quartetplatform.moudle1.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.lr.baselibrary.base.BaseRecycleViewAdapter;
@@ -33,7 +37,7 @@ public class RecommendAdapter extends BaseRecycleViewAdapter {
 
     @Override
     protected int getItemRes() {
-        return R.layout.item_recommend;
+        return R.layout.item_recommend1;
     }
 
     @Override
@@ -69,28 +73,47 @@ public class RecommendAdapter extends BaseRecycleViewAdapter {
         recommendViewHolder.rvFeatures.setAdapter(labelAdapter);
         labelAdapter.notifyDataSetChanged();
         if (UiTools.noEmpty(homeImage) && !isScrolling && position == (int) recommendViewHolder.itemView.getTag()) {
-            GlideApp.with(mContext)
-                    .asBitmap()//强制Glide返回一个Bitmap对象
+            Glide.with(mContext)
+//                    .asBitmap()//强制Glide返回一个Bitmap对象
+                    .asDrawable()
                     .load(UrlConstant.IMAGE_BASE_URL + homeImage)
-//                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                    .into(new SimpleTarget<Bitmap>() {
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(new SimpleTarget<Drawable>() {
                         @Override
-                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                            int width = resource.getWidth();
-                            int height = resource.getHeight();
-//                            Log.e("width_height", "width " + width + "--------height " + height);
-                            if (width >= height) {
-                                recommendViewHolder.ivBack.setImageResource(R.drawable.good_pc_bg);
-                                recommendViewHolder.ivFront.setVisibility(View.INVISIBLE);
-                                recommendViewHolder.ivFront2.setVisibility(View.VISIBLE);
-                                recommendViewHolder.ivFront2.setImageBitmap(resource);
-                            } else {
-                                recommendViewHolder.ivBack.setImageResource(R.drawable.good_phone_bg);
-                                recommendViewHolder.ivFront2.setVisibility(View.INVISIBLE);
-                                recommendViewHolder.ivFront.setVisibility(View.VISIBLE);
-                                recommendViewHolder.ivFront.setImageBitmap(resource);
-                            }
+                        public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+//                            Rect rect = resource.copyBounds();
+//                            int height = rect.height();
+//                            int width = rect.width();
+//                            if (width >= height) {
+//                                recommendViewHolder.ivBack.setImageResource(R.drawable.good_pc_bg);
+//                                recommendViewHolder.ivFront.setVisibility(View.INVISIBLE);
+//                                recommendViewHolder.ivFront2.setVisibility(View.VISIBLE);
+//                                recommendViewHolder.ivFront2.setImageDrawable(resource);
+//                            } else {
+//                                recommendViewHolder.ivBack.setImageResource(R.drawable.good_phone_bg);
+//                                recommendViewHolder.ivFront2.setVisibility(View.INVISIBLE);
+//                                recommendViewHolder.ivFront.setVisibility(View.VISIBLE);
+//                                recommendViewHolder.ivFront.setImageDrawable(resource);
+//                            }
                         }
+
+//                        @Override
+//                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                            int width = resource.getWidth();
+//                            int height = resource.getHeight();
+////                            Log.e("width_height", "width " + width + "--------height " + height);
+//                            if (width >= height) {
+//                                recommendViewHolder.ivBack.setImageResource(R.drawable.good_pc_bg);
+//                                recommendViewHolder.ivFront.setVisibility(View.INVISIBLE);
+//                                recommendViewHolder.ivFront2.setVisibility(View.VISIBLE);
+//                                recommendViewHolder.ivFront2.setImageBitmap(resource);
+//                            } else {
+//                                recommendViewHolder.ivBack.setImageResource(R.drawable.good_phone_bg);
+//                                recommendViewHolder.ivFront2.setVisibility(View.INVISIBLE);
+//                                recommendViewHolder.ivFront.setVisibility(View.VISIBLE);
+//                                recommendViewHolder.ivFront.setImageBitmap(resource);
+//                            }
+//                        }
                     });
         }
 //        else {

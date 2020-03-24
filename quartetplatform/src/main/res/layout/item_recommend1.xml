@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="5dp"
+    app:cardBackgroundColor="@color/colorWhite"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/good_pc_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivFront"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/ivBack"
+                app:layout_constraintDimensionRatio="W,1.72:1"
+                app:layout_constraintEnd_toEndOf="@id/ivBack"
+                app:layout_constraintStart_toStartOf="@id/ivBack"
+                app:layout_constraintTop_toTopOf="@id/ivBack"
+                app:layout_constraintWidth_percent="0.315" />
+
+            <ImageView
+                android:id="@+id/ivFront2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="@id/ivBack"
+                app:layout_constraintDimensionRatio="W,1:1.57"
+                app:layout_constraintEnd_toEndOf="@id/ivBack"
+                app:layout_constraintStart_toStartOf="@id/ivBack"
+                app:layout_constraintTop_toTopOf="@id/ivBack"
+                app:layout_constraintVertical_bias="0.4"
+                app:layout_constraintWidth_percent="0.75" />
+
+            <TextView
+                android:id="@+id/tvDiscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_orange_bg5"
+                android:paddingStart="5dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="3dp"
+                android:text="0折"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/ivBack"
+                app:layout_constraintTop_toTopOf="@id/ivBack" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6">
+
+            <TextView
+                android:id="@+id/tvProduceName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:padding="3dp"
+                android:text="股票双融系统"
+                android:textColor="@color/colorBlack"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvProduceName"
+                android:layout_marginStart="5dp"
+                android:padding="3dp"
+                android:text="股票软件"
+                android:textSize="13sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFeatures"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvType"
+                android:orientation="horizontal"
+                android:padding="3dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="@id/place"
+                app:layout_constraintTop_toTopOf="@id/place"
+                tools:listitem="@layout/item_label" />
+
+            <include
+                android:id="@+id/place"
+                layout="@layout/item_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvType"
+                android:layout_margin="3dp"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/place"
+                android:layout_marginStart="5dp"
+                android:padding="3dp"
+                android:textColor="@color/colorOrange"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvViews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/place"
+                android:layout_alignParentEnd="true"
+                android:drawableStart="@drawable/liulan"
+                android:drawablePadding="5dp"
+                android:padding="3dp"
+                android:text="1200" />
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

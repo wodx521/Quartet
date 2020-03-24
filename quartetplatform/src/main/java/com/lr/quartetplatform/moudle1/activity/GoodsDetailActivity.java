@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import com.lr.baselibrary.weight.CircleImageView;
 import com.lr.quartetplatform.HtmlImageGetter;
 import com.lr.quartetplatform.R;
 import com.lr.quartetplatform.UrlConstant;
+import com.lr.quartetplatform.bean.ChatListBean;
 import com.lr.quartetplatform.bean.FeatureDetailBean;
 import com.lr.quartetplatform.bean.GoodDetailBean;
 import com.lr.quartetplatform.bean.ManagerBean;
@@ -35,6 +37,7 @@ import com.lr.quartetplatform.moudle1.adapter.OtherRecommendAdapter;
 import com.lr.quartetplatform.moudle1.adapter.PcInterfaceAdapter;
 import com.lr.quartetplatform.moudle1.adapter.RecommendManagerAdapter;
 import com.lr.quartetplatform.moudle1.presenter.GoodsDetailPresenter;
+import com.lr.quartetplatform.moudle3.activity.ChatDetailActivity;
 import com.lzy.okgo.model.HttpParams;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -59,6 +62,7 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter> {
     private String modao;
     private String id;
     private RxPermissions rxPermissions;
+    private CheckedTextView tvIsConcern;
 
     @Override
     protected GoodsDetailPresenter getPresenter() {
@@ -76,6 +80,10 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter> {
             @Override
             public void msgListener(ManagerBean managerBean) {
                 // 推荐人列表发送消息
+                httpParams.clear();
+                httpParams.put("project_id", id);
+                httpParams.put("bp_id", managerBean.getId());
+                mPresenter.chatSeek(httpParams);
             }
 
             @Override
@@ -156,6 +164,7 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter> {
         ivFront = findViewById(R.id.ivFront);
         ivFront2 = findViewById(R.id.ivFront2);
         tvProductName = findViewById(R.id.tvProductName);
+        tvIsConcern = findViewById(R.id.tvIsConcern);
         tvProductFeatures = findViewById(R.id.tvProductFeatures);
         tvProductDes = findViewById(R.id.tvProductDes);
         tvProductPrice = findViewById(R.id.tvProductPrice);
@@ -184,6 +193,7 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter> {
         tvReservation.setOnClickListener(this);
         tvMsg.setOnClickListener(this);
         tvPhoneContact.setOnClickListener(this);
+        tvIsConcern.setOnClickListener(this);
     }
 
     @Override
@@ -204,6 +214,14 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter> {
                 break;
             case R.id.tvMsg:
                 // 在线咨询
+                List<ManagerBean> managerBeanList = recommendManagerAdapter.getManagerBeanList();
+                if (managerBeanList != null && managerBeanList.size() > 0) {
+                    ManagerBean managerBean = managerBeanList.get(0);
+                    httpParams.clear();
+                    httpParams.put("project_id", id);
+                    httpParams.put("bp_id", managerBean.getId());
+                    mPresenter.chatSeek(httpParams);
+                }
 
                 break;
             case R.id.tvPhoneContact:
@@ -211,9 +229,9 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter> {
                 rxPermissions.request(Manifest.permission.CALL_PHONE)
                         .subscribe(granted -> {
                             if (granted) {
-                                List<ManagerBean> managerBeanList = recommendManagerAdapter.getManagerBeanList();
-                                if (managerBeanList != null && managerBeanList.size() > 0) {
-                                    ManagerBean managerBean = managerBeanList.get(0);
+                                List<ManagerBean> managerBeanList1 = recommendManagerAdapter.getManagerBeanList();
+                                if (managerBeanList1 != null && managerBeanList1.size() > 0) {
+                                    ManagerBean managerBean = managerBeanList1.get(0);
                                     Intent intent = new Intent();
                                     intent.setAction(Intent.ACTION_DIAL);
                                     intent.setData(Uri.parse("tel:" + managerBean.getMobile()));
@@ -231,6 +249,11 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter> {
                 bundle.clear();
                 bundle.putString("id", id);
                 startActivity(GoodsDetailActivity.this, bundle, ReservationActivity.class);
+                break;
+            case R.id.tvIsConcern:
+                httpParams.clear();
+                httpParams.put("id", id);
+                mPresenter.setConcern(httpParams);
                 break;
             default:
         }
@@ -260,7 +283,8 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter> {
                         }
                     }
                 });
-
+        String concern = goodDetailBean.getConcern();
+        tvIsConcern.setChecked("1".equals(concern));
         tvProductName.setText(goodDetailBean.getName());
         tvProductDes.setText(goodDetailBean.getIntroduct());
         tvProductPrice.setText("￥" + goodDetailBean.getPrice());
@@ -307,5 +331,26 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter> {
 //            tvMsg.setHint();
 //            tvPhoneContact.setHint(managerBean.getMobile());
         }
+    }
+
+    public void setConcernSuccess() {
+        if (tvIsConcern.isChecked()) {
+            tvIsConcern.setChecked(false);
+        } else {
+            tvIsConcern.setChecked(true);
+        }
+    }
+
+    public void chatSeek(String data) {
+        ChatListBean chatListBean = new ChatListBean();
+        List<ManagerBean> managerBeanList = recommendManagerAdapter.getManagerBeanList();
+        if (managerBeanList != null && managerBeanList.size() > 0) {
+            ManagerBean managerBean = managerBeanList.get(0);
+            chatListBean.setBpPhone(managerBean.getMobile());
+            chatListBean.setBpName(managerBean.getNickname());
+        }
+        chatListBean.setChatId(data);
+        bundle.putParcelable("chatUser", chatListBean);
+        startActivity(GoodsDetailActivity.this, bundle, ChatDetailActivity.class);
     }
 }

@@ -96,7 +96,7 @@
             android:drawablePadding="5dp"
             android:gravity="center"
             android:padding="5dp"
-            android:text="@string/mySchedule"
+            android:text="@string/myConcern"
             android:textColor="@color/colorBlack" />
 
         <TextView
