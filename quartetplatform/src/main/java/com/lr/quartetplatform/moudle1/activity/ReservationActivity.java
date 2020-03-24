@@ -1,6 +1,5 @@
 package com.lr.quartetplatform.moudle1.activity;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -11,13 +10,13 @@ import com.bigkoo.pickerview.listener.CustomListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.lr.baselibrary.base.BaseMvpActivity;
+import com.lr.baselibrary.utils.UiTools;
 import com.lr.quartetplatform.R;
 import com.lr.quartetplatform.moudle1.presenter.ReservationPresenter;
+import com.lzy.okgo.model.HttpParams;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class ReservationActivity extends BaseMvpActivity<ReservationPresenter> {
@@ -27,6 +26,9 @@ public class ReservationActivity extends BaseMvpActivity<ReservationPresenter> {
     private OptionsPickerView pvNoLinkOptions;
     private List<String> timeList = new ArrayList<>();
     private List<String> dataList = new ArrayList<>();
+    private View view1;
+    private HttpParams httpParams = new HttpParams();
+    private String id;
 
     @Override
     protected ReservationPresenter getPresenter() {
@@ -36,11 +38,12 @@ public class ReservationActivity extends BaseMvpActivity<ReservationPresenter> {
     @Override
     protected void initData() {
         tvTitle.setText(R.string.reservation);
-
-
         getChooseData();
-
-
+        if (mBundle != null) {
+            id = mBundle.getString("id");
+        }
+        tvData.setText(dataList.get(0));
+        tvTime.setText(timeList.get(0));
         pvNoLinkOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
 
             @Override
@@ -69,10 +72,10 @@ public class ReservationActivity extends BaseMvpActivity<ReservationPresenter> {
                         });
                     }
                 })
-                .setItemVisibleCount(5)
+                .setItemVisibleCount(6)
                 .build();
         pvNoLinkOptions.setNPicker(dataList, timeList, null);
-        pvNoLinkOptions.setSelectOptions(0, 0, 1);
+        pvNoLinkOptions.setSelectOptions(0, 0, 0);
     }
 
     private void getChooseData() {
@@ -120,12 +123,6 @@ public class ReservationActivity extends BaseMvpActivity<ReservationPresenter> {
         timeList.add("晚上18:00后");
     }
 
-    private String getTime(Date date) {//可根据需要自行截取数据显示
-        Log.d("getTime()", "choice date millis: " + date.getTime());
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return format.format(date);
-    }
-
     @Override
     protected int getResId() {
         return R.layout.activity_reservation;
@@ -137,6 +134,7 @@ public class ReservationActivity extends BaseMvpActivity<ReservationPresenter> {
         ivBack = findViewById(R.id.ivBack);
         tvData = findViewById(R.id.tvData);
         tvTime = findViewById(R.id.tvTime);
+        view1 = findViewById(R.id.view1);
         etPhone = findViewById(R.id.etPhone);
         tvReservation = findViewById(R.id.tvReservation);
     }
@@ -147,6 +145,7 @@ public class ReservationActivity extends BaseMvpActivity<ReservationPresenter> {
         tvData.setOnClickListener(this);
         tvTime.setOnClickListener(this);
         tvReservation.setOnClickListener(this);
+        view1.setOnClickListener(this);
     }
 
     @Override
@@ -156,15 +155,31 @@ public class ReservationActivity extends BaseMvpActivity<ReservationPresenter> {
                 finish();
                 break;
             case R.id.tvData:
+            case R.id.tvTime:
+            case R.id.view1:
                 pvNoLinkOptions.show();
                 break;
-            case R.id.tvTime:
-
-                break;
             case R.id.tvReservation:
+                String phone = UiTools.getText(etPhone);
+                String chooseData = UiTools.getText(tvData);
+                String chooseTime = UiTools.getText(tvTime);
 
+                if (UiTools.noEmpty(phone)) {
+                    httpParams.clear();
+                    httpParams.put("project_id", id);
+                    httpParams.put("fowardtime", chooseData + chooseTime);
+                    httpParams.put("mobile", phone);
+                    mPresenter.sendReservation(httpParams);
+                }else{
+                    UiTools.showToast(R.string.inputContactPhone);
+                }
                 break;
             default:
         }
+    }
+
+    public void setUserForward() {
+        UiTools.showToast(R.string.reservationSuccess);
+        finish();
     }
 }

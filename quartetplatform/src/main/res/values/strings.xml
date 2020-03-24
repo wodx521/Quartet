@@ -89,5 +89,6 @@
     <string name="yourContactPhone">您的联系方式</string>
     <string name="reservationNow">立即预约</string>
     <string name="reservation">预约</string>
+    <string name="reservationSuccess">您已预约成功，请等待客户经理致电</string>
 
 </resources>

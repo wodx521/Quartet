@@ -41,6 +41,8 @@ public class UrlConstant {
     public static final String SHOP_GOODSDETAIL = BASE_URL + "shop/goodsDetail";
     // 经理人
     public static final String SHOP_BPS = BASE_URL + "shop/bps";
+    // 预约服务
+    public static final String USER_FORWARD = BASE_URL + "user/forward";
     // 新闻地址
     public static final String NEWS_BANNER = "https://unidemo.dcloud.net.cn/api/banner/36kr";
     // 新闻列表

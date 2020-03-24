@@ -1,11 +1,15 @@
 package com.lr.quartetplatform.moudle1.activity;
 
+import android.Manifest;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +36,7 @@ import com.lr.quartetplatform.moudle1.adapter.PcInterfaceAdapter;
 import com.lr.quartetplatform.moudle1.adapter.RecommendManagerAdapter;
 import com.lr.quartetplatform.moudle1.presenter.GoodsDetailPresenter;
 import com.lzy.okgo.model.HttpParams;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,6 +57,8 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter> {
     private OtherRecommendAdapter otherRecommendAdapter;
     private Bundle bundle = new Bundle();
     private String modao;
+    private String id;
+    private RxPermissions rxPermissions;
 
     @Override
     protected GoodsDetailPresenter getPresenter() {
@@ -60,9 +67,35 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter> {
 
     @Override
     protected void initData() {
+        rxPermissions = new RxPermissions(GoodsDetailActivity.this);
+
         // 推荐人列表
         recommendManagerAdapter = new RecommendManagerAdapter(GoodsDetailActivity.this);
         rvRecommend.setAdapter(recommendManagerAdapter);
+        recommendManagerAdapter.setAdvisoryListener(new RecommendManagerAdapter.AdvisoryListener() {
+            @Override
+            public void msgListener(ManagerBean managerBean) {
+                // 推荐人列表发送消息
+            }
+
+            @Override
+            public void phoneListener(ManagerBean managerBean) {
+                // 推荐人列表打电话操作
+                rxPermissions.request(Manifest.permission.CALL_PHONE)
+                        .subscribe(granted -> {
+                            if (granted) {
+                                Intent intent = new Intent();
+                                intent.setAction(Intent.ACTION_DIAL);
+                                intent.setData(Uri.parse("tel:" + managerBean.getMobile()));
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            } else {
+                                // 权限被拒绝
+                                Toast.makeText(GoodsDetailActivity.this, "权限被拒绝，无法使用", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
 
         // 核心特色
         mainFeaturesAdapter = new MainFeaturesAdapter(GoodsDetailActivity.this);
@@ -95,7 +128,7 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter> {
             httpParams.clear();
             GoodDetailBean goodDetailBean = mBundle.getParcelable("goodInfo");
             String profuceName = mBundle.getString("profuceName");
-            String id = mBundle.getString("id");
+            id = mBundle.getString("id");
             if (goodDetailBean != null) {
                 tvTitle.setText(goodDetailBean.getName());
                 httpParams.put("id", goodDetailBean.getId());
@@ -175,11 +208,29 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter> {
                 break;
             case R.id.tvPhoneContact:
                 // 电话咨询
-
+                rxPermissions.request(Manifest.permission.CALL_PHONE)
+                        .subscribe(granted -> {
+                            if (granted) {
+                                List<ManagerBean> managerBeanList = recommendManagerAdapter.getManagerBeanList();
+                                if (managerBeanList != null && managerBeanList.size() > 0) {
+                                    ManagerBean managerBean = managerBeanList.get(0);
+                                    Intent intent = new Intent();
+                                    intent.setAction(Intent.ACTION_DIAL);
+                                    intent.setData(Uri.parse("tel:" + managerBean.getMobile()));
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                }
+                            } else {
+                                // 权限被拒绝
+                                Toast.makeText(GoodsDetailActivity.this, "权限被拒绝，无法使用", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                 break;
             case R.id.tvReservation:
                 // 预约一对一咨询
-                startActivity(GoodsDetailActivity.this, bundle,ReservationActivity.class);
+                bundle.clear();
+                bundle.putString("id", id);
+                startActivity(GoodsDetailActivity.this, bundle, ReservationActivity.class);
                 break;
             default:
         }
@@ -256,6 +307,5 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter> {
 //            tvMsg.setHint();
 //            tvPhoneContact.setHint(managerBean.getMobile());
         }
-
     }
 }

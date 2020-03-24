@@ -37,12 +37,20 @@ public class RecommendManagerAdapter extends BaseRecycleViewAdapter {
             @Override
             public void onClick(View v) {
                 // 信息点击
+                if (advisoryListener!=null) {
+                    ManagerBean managerBean = managerBeanList.get((Integer) recommendManagerViewHolder.itemView.getTag());
+                    advisoryListener.msgListener(managerBean);
+                }
             }
         });
         recommendManagerViewHolder.ivPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 电话点击
+                if (advisoryListener!=null) {
+                    ManagerBean managerBean = managerBeanList.get((Integer) recommendManagerViewHolder.itemView.getTag());
+                    advisoryListener.phoneListener(managerBean);
+                }
             }
         });
         return recommendManagerViewHolder;
@@ -52,7 +60,6 @@ public class RecommendManagerAdapter extends BaseRecycleViewAdapter {
     protected void bindClickListener(RecyclerView.ViewHolder viewHolder, int position) {
         RecommendManagerViewHolder recommendManagerViewHolder = (RecommendManagerViewHolder) viewHolder;
         ManagerBean managerBean = managerBeanList.get(position);
-
         recommendManagerViewHolder.tvManagerName.setText(managerBean.getNickname());
         GlideApp.with(mContext)
                 .load(UrlConstant.IMAGE_BASE_URL + managerBean.getAvatar())
@@ -76,9 +83,21 @@ public class RecommendManagerAdapter extends BaseRecycleViewAdapter {
     @Override
     public int getItemCount() {
         if (managerBeanList != null && managerBeanList.size() > 0) {
-           return managerBeanList.size();
+            return managerBeanList.size();
         }
         return 0;
+    }
+
+    public interface AdvisoryListener {
+        void msgListener( ManagerBean managerBean);
+
+        void phoneListener( ManagerBean managerBean);
+    }
+
+   private AdvisoryListener advisoryListener;
+
+    public void setAdvisoryListener(AdvisoryListener advisoryListener) {
+        this.advisoryListener = advisoryListener;
     }
 
     static class RecommendManagerViewHolder extends RecyclerView.ViewHolder {
